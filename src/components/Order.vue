@@ -1215,44 +1215,44 @@ export default {
     return {
       loading: false,
 
-      step: 4,
+      step: 0,
 
       type_owner: 1,
 
-      last_name: 'asd',
-      first_name: 'asd',
-      patronymic: 'asd',
+      last_name: '',
+      first_name: '',
+      patronymic: '',
 
       org_name: '',
       kpp: '',
       ogrn: '',
 
-      city: 'asd',
-      street: 'asd',
-      home: 1,
-      flat: 41,
+      city: '',
+      street: '',
+      home: null,
+      flat: null,
 
-      pass_serial: 123,
-      pass_number: 123,
+      pass_serial: null,
+      pass_number: null,
 
-      inn: 312,
-      snils: 312,
+      inn: null,
+      snils: null,
 
-      phone: '+79600594925',
-      email: 'nikita@mail.ru',
+      phone: '',
+      email: '',
 
-      car_mark: '3123',
-      commercial_name: '3123',
-      car_type: '123',
-      car_id: 12312,
-      car_color: 'black',
-      drive_ts: '123',
+      car_mark: '',
+      commercial_name: '',
+      car_type: '',
+      car_id: null,
+      car_color: '',
+      drive_ts: '',
 
-      engine_model: '123',
-      engine_number: '1231',
-      engine_power: '1323',
-      engine_volume: '123',
-      fuel: '123',
+      engine_model: '',
+      engine_number: '',
+      engine_power: '',
+      engine_volume: '',
+      fuel: '',
 
       sts_front: '',
       sts_back: '',
@@ -1363,9 +1363,10 @@ export default {
         }
       }
 
-      axios.post('https://admin.gospts.ru/', formData, config)
+      axios.post('http://127.0.0.1:8000/api/order/create', formData, config)
         .then(res => {
           this.loading = false
+          this.step = 5
         })
         .catch(err => {
           this.loading = false
