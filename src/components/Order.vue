@@ -95,7 +95,8 @@
                     name="radio"
                     rules="required"
                   >
-                    <input type="radio" value="" :checked="type_owner===1" @change="type_owner=1" id="type_fiz"><label for="type_fiz" style="margin-right: 5px">Физическое
+                    <input type="radio" value="" :checked="type_owner===1" @change="type_owner=1" id="type_fiz"><label
+                    for="type_fiz" style="margin-right: 5px">Физическое
                     лицо</label>
                   </validation-provider>
                   <validation-provider
@@ -103,7 +104,8 @@
                     name="radio"
                     rules="required"
                   >
-                    <input type="radio" value="" :checked="type_owner===2" @change="type_owner=2" id="type_yur"><label for="type_yur">Юридическое
+                    <input type="radio" value="" :checked="type_owner===2" @change="type_owner=2" id="type_yur"><label
+                    for="type_yur">Юридическое
                     лицо</label>
                   </validation-provider>
                 </div>
@@ -1080,8 +1082,13 @@
         </section>
 
         <section class="step-four" v-if="step === 4">
-
-          <div class="form">
+          <div v-if="loading" style="display: flex; justify-content: center">
+            <ClipLoader
+              color="#79B285FF"
+              :size="100"
+            />
+          </div>
+          <div class="form" v-if="!loading">
             <h2 class="form__title title title--green">Оплата и&nbsp;отправка заявки</h2>
             <div class="form__sum sum">
               <h3 class="sum__title title">Стоимость услуги</h3>
@@ -1113,6 +1120,7 @@
               </ul>
             </div>
           </div>
+
           <section v-if="step>0 && step<5">
             <div class="form__bottom ">
               <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
@@ -1151,6 +1159,8 @@ import {required, digits, email, max, regex, ext, size} from 'vee-validate/dist/
 import {extend, ValidationObserver, ValidationProvider, setInteractionMode} from 'vee-validate'
 import Header from "./Header";
 import Footer from "./Footer";
+
+import {ClipLoader} from '@saeris/vue-spinners'
 
 import axios from 'axios'
 
@@ -1198,11 +1208,14 @@ export default {
     Header,
     ValidationProvider,
     ValidationObserver,
+    ClipLoader
   },
 
   data() {
     return {
-      step: 0,
+      loading: false,
+
+      step: 4,
 
       type_owner: 1,
 
@@ -1270,6 +1283,7 @@ export default {
       window.scrollTo(0, 0)
     },
     submit() {
+      this.loading = true
       this.postData()
     },
 
@@ -1350,8 +1364,12 @@ export default {
       }
 
       axios.post('https://admin.gospts.ru/', formData, config)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        .then(res => {
+          this.loading = false
+        })
+        .catch(err => {
+          this.loading = false
+        })
 
     }
   }

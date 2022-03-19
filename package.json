@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@saeris/vue-spinners": "^1.0.8",
     "axios": "^0.26.1",
     "vee-validate": "^3.4.14",
     "vue": "^2.6.11"
