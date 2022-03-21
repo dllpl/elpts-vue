@@ -3,7 +3,7 @@
     <Header/>
     <main class="container">
       <section class="step">
-        <h1 class="step__title title title--big">Как пройдут следующие 15&nbsp;минут?</h1>
+        <h1 class="step__title title title--big" v-if="step===0">Как пройдут следующие 15&nbsp;минут?</h1>
         <ul class="step__list">
           <li class="step__item">
             <button class="btn btn--step" :class="{'btn--step-active': step ===0}">Ознакомление</button>
@@ -80,36 +80,36 @@
 
 
         <section class="step-one" v-if="step === 1">
-          <validation-observer
-            ref="observer"
-            v-slot="{ invalid, valid }"
-          >
-            <div class="form">
-              <h2 class="form__title title title--green">Сведения о&nbsp;заявителе</h2>
+          <div class="form">
+            <h2 class="form__title title title--green">Сведения о&nbsp;заявителе</h2>
 
-              <div class="form__top">
-                <div class="form__item">
-                  <h3 class="form__name title">Собственник ТС</h3>
-                  <validation-provider
+            <div class="form__top">
+              <div class="form__item">
+                <h3 class="form__name title">Собственник ТС</h3>
+                <validation-provider
                     v-slot="{ errors }"
                     name="radio"
                     rules="required"
-                  >
-                    <input type="radio" value="" :checked="type_owner===1" @change="type_owner=1" id="type_fiz"><label
+                >
+                  <input type="radio" value="" :checked="type_owner===1" @change="type_owner=1" id="type_fiz"><label
                     for="type_fiz" style="margin-right: 5px">Физическое
-                    лицо</label>
-                  </validation-provider>
-                  <validation-provider
+                  лицо</label>
+                </validation-provider>
+                <validation-provider
                     v-slot="{ errors }"
                     name="radio"
                     rules="required"
-                  >
-                    <input type="radio" value="" :checked="type_owner===2" @change="type_owner=2" id="type_yur"><label
+                >
+                  <input type="radio" value="" :checked="type_owner===2" @change="type_owner=2" id="type_yur"><label
                     for="type_yur">Юридическое
-                    лицо</label>
-                  </validation-provider>
-                </div>
+                  лицо</label>
+                </validation-provider>
               </div>
+            </div>
+            <validation-observer
+                ref="observer"
+                v-slot="{ invalid, valid }"
+            >
               <div class="form__fiz face-fiz" :class="{'face-active':type_owner===1}"
                    v-if="type_owner===1">
                 <div class="form__center">
@@ -119,9 +119,9 @@
                       <h3 class="form__name title">ФИО собственника</h3>
                       <div class="form__input">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Фамилия"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Фамилия"
+                            rules="required"
                         >
                           <input class="input" type="text" name="family" placeholder="Фамилия"
 
@@ -129,18 +129,18 @@
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Имя"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Имя"
+                            rules="required"
                         >
                           <input class="input" type="text" name="name" placeholder="Имя"
                                  v-model="first_name">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Отчество"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Отчество"
+                            rules="required"
                         >
                           <input class="input" type="text" placeholder="Отчество"
                                  v-model="patronymic">
@@ -153,18 +153,18 @@
                       <h3 class="form__name title">Адрес регистрации</h3>
                       <div class="form__input">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Город"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Город"
+                            rules="required"
                         >
                           <input class="input" type="text" name="city"
                                  placeholder="Населенный пункт" v-model="city">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Улица"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Улица"
+                            rules="required"
                         >
                           <input class="input" type="text" name="street" placeholder="Улица"
                                  v-model="street">
@@ -172,18 +172,18 @@
 
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Дом"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Дом"
+                            rules="required"
                         >
                           <input class="input" type="text" name="house" placeholder="Дом"
                                  v-model="home">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Квартира"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Квартира"
+                            rules="required"
                         >
                           <input class="input" type="text" name="flat" placeholder="Квартира"
                                  v-model="flat">
@@ -198,21 +198,21 @@
                       <h3 class="form__name title">Паспортные данные</h3>
                       <div class="form__input">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Cерия"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Серия"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="series" placeholder="Серия"
+                          <input v-mask="['####']" class="input" type="text" name="series" placeholder="Серия"
                                  v-model="pass_serial">
                           <p style="color:red">{{ errors[0] }}</p>
 
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Номер"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Номер"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="number" placeholder="Номер"
+                          <input v-mask="['######']" class="input" type="text" name="number" placeholder="Номер"
                                  v-model="pass_number">
                           <p style="color:red">{{ errors[0] }}</p>
 
@@ -225,20 +225,20 @@
                       <h3 class="form__name title">ИНН и СНИЛС</h3>
                       <div class="form__input">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="ИНН"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="ИНН"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="inn" placeholder="ИНН"
+                          <input v-mask="['############']" class="input" type="text" name="inn" placeholder="ИНН"
                                  v-model="inn">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="СНИЛС"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="СНИЛС"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="snils" placeholder="СНИЛС"
+                          <input v-mask="['###-###-### ##']" class="input" type="text" name="snils" placeholder="СНИЛС"
                                  v-model="snils">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
@@ -249,18 +249,19 @@
                       <h3 class="form__name title">Контактная информация</h3>
                       <div class="form__input">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Телефон"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Телефон"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="phone" placeholder="Телефон"
+                          <input v-mask="['+7(###)###-##-##']" class="input" type="text" name="phone"
+                                 placeholder="+7(___)___-__-__"
                                  v-model="phone">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Эл. почта"
-                          rules="required|email"
+                            v-slot="{ errors }"
+                            name="Эл. почта"
+                            rules="required|email"
                         >
                           <input class="input" type="text" name="mail" placeholder="Эл. почта"
                                  v-model="email">
@@ -270,16 +271,16 @@
                     </div>
                     <div style="display: flex;">
                       <validation-provider
-                        v-slot="{ errors}"
-                        name="Согласие"
-                        rules="required"
+                          v-slot="{ errors}"
+                          name="Согласие"
+                          rules="required"
                       >
                         <div style="display: flex" class="form-group">
                           <input type="checkbox" id="checkbox1" v-model="checkbox">
 
                           <label for="checkbox1">Даю согласие на&nbsp;обработку персональных данных, соглашаюсь с <a
-                            href="#"
-                            target="_blank">
+                              href="#"
+                              target="_blank">
                             политикой&nbsp;конфиденциальности</a></label>
                         </div>
                         <p style="color:red">{{ errors[0] }}</p>
@@ -287,10 +288,24 @@
                     </div>
                   </div>
                 </div>
+                <section v-if="step>0 && step<5">
+                  <div class="form__bottom ">
+                    <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
+                    <button class="btn btn--next" @click="stepNext" :disabled="invalid"
+                            :class="{'disabled':invalid}">Далее
+                      ›
+                    </button>
+                  </div>
+                </section>
               </div>
+            </validation-observer>
 
-              <div class="form__jur face-jur" :class="{'face-active':type_owner===2}"
-                   v-if="type_owner===2">
+            <div class="form__jur face-jur" :class="{'face-active':type_owner===2}"
+                 v-if="type_owner===2">
+              <validation-observer
+                  ref="observer"
+                  v-slot="{ invalid, valid }"
+              >
                 <div class="form__center">
 
                   <div class="form__left">
@@ -298,11 +313,11 @@
                       <h3 class="form__name title">Название организации</h3>
                       <div class="">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Название организации"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Название организации"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="name"
+                          <input class="input" type="text" name="name_org"
                                  placeholder="Название организации"
                                  v-model="org_name">
                           <p style="color:red">{{ errors[0] }}</p>
@@ -314,36 +329,36 @@
                       <h3 class="form__name title">Юридический адрес организации</h3>
                       <div class="form__input">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Город"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Город"
+                            rules="required"
                         >
                           <input class="input" type="text" name="city"
                                  placeholder="Населенный пункт" v-model="city">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Город"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Город"
+                            rules="required"
                         >
                           <input class="input " type="text" name="street" placeholder="Улица"
                                  v-model="street">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Дом"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Дом"
+                            rules="required"
                         >
                           <input class="input " type="text" name="house" placeholder="Дом"
                                  v-model="home">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Квартира"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="Квартира"
+                            rules="required"
                         >
                           <input class="input" type="text" name="flat" placeholder="Квартира"
                                  v-model="flat">
@@ -356,18 +371,19 @@
                       <h3 class="form__name title">Контактная информация</h3>
                       <div class="form__input">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Телефон"
-                          rules="required|phone"
+                            v-slot="{ errors }"
+                            name="Телефон"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="phone" placeholder="Телефон"
+                          <input v-mask="['+7(###)###-##-##']" class="input" type="text" name="phone_yur"
+                                 placeholder="+7(___)___-__-__"
                                  v-model="phone">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="Телефон"
-                          rules="required|email"
+                            v-slot="{ errors }"
+                            name="Почта"
+                            rules="required|email"
                         >
                           <input class="input" type="text" name="mail" placeholder="Эл. почта"
                                  v-model="email">
@@ -381,29 +397,29 @@
                       <h3 class="form__name title">Документы</h3>
                       <div class="">
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="ИНН"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="ИНН"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="inn" placeholder="ИНН"
+                          <input class="input" type="text" name="inn" placeholder="ИНН" v-mask="['##########']"
                                  v-model="inn">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="КПП"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="КПП"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="kpp" placeholder="КПП"
+                          <input class="input" type="text" name="kpp" placeholder="КПП" v-mask="['#########']"
                                  v-model="kpp">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
                         <validation-provider
-                          v-slot="{ errors }"
-                          name="ОГРН"
-                          rules="required"
+                            v-slot="{ errors }"
+                            name="ОГРН"
+                            rules="required"
                         >
-                          <input class="input" type="text" name="ogrn" placeholder="ОГРН"
+                          <input class="input" type="text" name="ogrn" placeholder="ОГРН" v-mask="['#############']"
                                  v-model="ogrn">
                           <p style="color:red">{{ errors[0] }}</p>
                         </validation-provider>
@@ -413,40 +429,41 @@
                 </div>
                 <div>
                   <validation-provider
-                    v-slot="{ errors }"
-                    name="Согласие"
-                    rules="required"
+                      v-slot="{ errors }"
+                      name="Согласие"
+                      rules="required"
                   >
                     <div style="display: flex" class="form-group">
                       <input type="checkbox" id="checkbox" v-model="checkbox" @click="checkbox===true">
 
                       <label for="checkbox">Даю согласие на&nbsp;обработку персональных данных, соглашаюсь с <a
-                        href="#"
-                        target="_blank">
+                          href="#"
+                          target="_blank">
                         политикой&nbsp;конфиденциальности</a></label>
                     </div>
                     <p style="color:red">{{ errors[0] }}</p>
                   </validation-provider>
                 </div>
-              </div>
+                <section v-if="step>0 && step<5">
+                  <div class="form__bottom ">
+                    <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
+                    <button class="btn btn--next" @click="stepNext" :disabled="invalid"
+                            :class="{'disabled':invalid}">Далее
+                      ›
+                    </button>
+                  </div>
+                </section>
+              </validation-observer>
             </div>
-            <section v-if="step>0 && step<5">
-              <div class="form__bottom ">
-                <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
-                <button class="btn btn--next" @click="stepNext" :disabled="invalid"
-                        :class="{'disabled':invalid}">Далее
-                  ›
-                </button>
-              </div>
-            </section>
-          </validation-observer>
+          </div>
+
         </section>
 
 
         <section class="step-two" v-if="step === 2">
           <validation-observer
-            ref="observer"
-            v-slot="{ invalid, valid }"
+              ref="observer"
+              v-slot="{ invalid, valid }"
           >
             <div class="form">
               <h2 class="form__title title title--green">Сведения о&nbsp;транспортном средстве</h2>
@@ -456,10 +473,10 @@
                   <h3 class="form__name title">Марка и модификация</h3>
                   <div class="form__input">
                     <validation-provider
-                      v-slot="{ errors }"
-                      name="Марка и модификация ТС"
-                      rules="required"
-                      class="input--l"
+                        v-slot="{ errors }"
+                        name="Марка и модификация ТС"
+                        rules="required"
+                        class="input--l"
                     >
                       <input class="input" type="text" name="brand"
                              placeholder="Марка и модификация ТС"
@@ -475,10 +492,10 @@
                   <h3 class="form__name title">Коммерческое наименование</h3>
                   <div class="form__input">
                     <validation-provider
-                      v-slot="{ errors }"
-                      name="Марка и модификация ТС"
-                      rules="required"
-                      style="width: 100%"
+                        v-slot="{ errors }"
+                        name="Марка и модификация ТС"
+                        rules="required"
+                        style="width: 100%"
                     >
                       <input class="input" type="text" name="Commerс-name"
                              placeholder="Коммерческое наименование" v-model="commercial_name">
@@ -493,13 +510,26 @@
                     <h3 class="form__name title">Тип</h3>
                     <div>
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Тип ТС"
-                        rules="required"
-                        style="width: 100%"
+                          v-slot="{ errors }"
+                          name="Тип ТС"
+                          rules="required"
+                          style="width: 100%"
                       >
-                        <input class="input" type="text" name="type" placeholder="Тип"
-                               v-model="car_type">
+                        <select class="input" name="type"
+                                v-model="car_type">
+                          <option selected disabled>Выберите тип</option>
+                          <option value="Легковой">Легковой</option>
+                          <option value="Грузовой">Грузовой</option>
+                          <option value="Мотоцикл">Мотоцикл</option>
+                          <option value="Багги">Багги</option>
+                          <option value="Вездеход-амфибия">Вездеход-амфибия</option>
+                          <option value="Картинг">Картинг</option>
+                          <option value="Мотовездеход">Мотовездеход</option>
+                          <option value="Сидельный тягач">Сидельный тягач</option>
+                          <option value="Скутер">Скутер</option>
+                          <option value="Снегоход">Снегоход</option>
+
+                        </select>
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -509,10 +539,13 @@
                     <h3 class="form__name title">Идентификационный номер</h3>
                     <div>
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Идентификационный номер"
-                        rules="required"
-                        style="width: 100%"
+                          v-slot="{ errors }"
+                          name="Идентификационный номер"
+                          :rules="{
+                            required: true,
+                            length: 17
+                          }"
+                          style="width: 100%"
                       >
                         <input class="input" type="text" name="id-number"
                                placeholder="Идентификационный номер"
@@ -526,20 +559,20 @@
                     <h3 class="form__name title">Модель и номер двигателя</h3>
                     <div class="form__input">
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Модель двигателя"
-                        rules="required"
-                        class="input--s"
+                          v-slot="{ errors }"
+                          name="Модель двигателя"
+                          rules="required"
+                          class="input--s"
                       >
                         <input class="input " type="text" name="model" placeholder="Модель"
                                v-model="engine_model">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Номер двигателя"
-                        rules="required"
-                        class="input--s"
+                          v-slot="{ errors }"
+                          name="Номер двигателя"
+                          rules="required"
+                          class="input--s"
                       >
                         <input class="input " type="text" name="engine-number"
                                placeholder="Номер двигателя" v-model="engine_number">
@@ -555,10 +588,10 @@
                     <h3 class="form__name title">Цвет кузова</h3>
                     <div class="">
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Цвет кузова"
-                        rules="required"
-                        class=""
+                          v-slot="{ errors }"
+                          name="Цвет кузова"
+                          rules="required"
+                          class=""
                       >
                         <input class="input" type="text" name="color" placeholder="Цвет кузова"
                                v-model="car_color">
@@ -571,10 +604,10 @@
                     <h3 class="form__name title">Привод ТС</h3>
                     <div class="">
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Привод ТС"
-                        rules="required"
-                        class=""
+                          v-slot="{ errors }"
+                          name="Привод ТС"
+                          rules="required"
+                          class=""
                       >
                         <input class="input" type="text" name="vehicle" placeholder="Привод ТС"
                                v-model="drive_ts">
@@ -587,33 +620,40 @@
                     <h3 class="form__name title">Мощность и&nbsp;объем двигателя, вид топлива</h3>
                     <div class="form__input">
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Мощность"
-                        rules="required"
-                        class="input--xs"
+                          v-slot="{ errors }"
+                          name="Мощность"
+                          rules="required"
+                          class="input--xs"
                       >
-                        <input class="input " type="text" name="power" placeholder="Мощность"
+                        <input class="input" type="text" name="power" placeholder="Мощность, л.с."
+                               v-mask="['###', '##', '####']"
                                v-model="engine_power">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Мощность"
-                        rules="required"
-                        class="input--xs"
+                          v-slot="{ errors }"
+                          name="Объем"
+                          rules="required"
+                          class="input--xs"
                       >
-                        <input class="input" type="text" name="volume" placeholder="Объем"
+                        <input class="input" type="text" name="volume" placeholder="Объем, см3"
+                               v-mask="['###', '##', '####']"
                                v-model="engine_volume">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
-                        v-slot="{ errors }"
-                        name="Мощность"
-                        rules="required"
-                        class="input--xs"
+                          v-slot="{ errors }"
+                          name="Топливо"
+                          rules="required"
+                          class="input--xs"
                       >
-                        <input class="input" type="text" name="fuel" placeholder="Топливо"
-                               v-model="fuel">
+                        <select class="input" type="text"
+                                v-model="fuel">
+                          <option disabled selected>Топливо</option>
+                          <option value="Бензин">Бензин</option>
+                          <option value="Дизель">Дизель</option>
+
+                        </select>
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -637,8 +677,8 @@
 
         <section class="step-three" v-if="step === 3">
           <validation-observer
-            ref="observer"
-            v-slot="{valid}"
+              ref="observer"
+              v-slot="{valid}"
           >
             <div class="form">
               <h2 class="form__title title title--green">Загрузка изображений</h2>
@@ -664,8 +704,8 @@
                     <div class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -676,7 +716,8 @@
 
                           <label class="input__file-button" for="input__file1">
                             <div class="input__file-icon-wrapper">
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?sts_front_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text"
@@ -705,8 +746,8 @@
                     <form class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -716,7 +757,8 @@
                                  ref="file">
                           <label class="input__file-button" for="input__file2">
                             <div class="input__file-icon-wrapper">
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?sts_back_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text"
@@ -744,8 +786,8 @@
                     <form class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -755,7 +797,8 @@
                                  ref="file">
                           <label class="input__file-button" for="input__file3">
                             <div class="input__file-icon-wrapper">
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?ts_front_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text "
@@ -783,8 +826,8 @@
                     <form class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -793,7 +836,8 @@
                                  ref="file" @change="validate">
                           <label class="input__file-button" for="input__file4">
                             <div class="input__file-icon-wrapper">
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?ts_back_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text"
@@ -822,8 +866,8 @@
                     <form class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -833,7 +877,8 @@
                                  ref="file">
                           <label class="input__file-button" for="input__file5">
                             <div class="input__file-icon-wrapper">
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?ts_right_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text"
@@ -863,8 +908,8 @@
                     <form class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -873,7 +918,8 @@
                                  ref="file" @change="validate">
                           <label class="input__file-button" for="input__file6">
                             <div class="input__file-icon-wrapper">
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?ts_left_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text"
@@ -903,8 +949,8 @@
                     <form class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -915,7 +961,8 @@
                           <label class="input__file-button" for="input__file7">
                             <div class="input__file-icon-wrapper"
                             >
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?vin_door_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text"
@@ -945,8 +992,8 @@
                     <form class="">
                       <div class="input__wrapper">
                         <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
+                            v-slot="{ errors, validate, valid }"
+                            :rules="{
                           ext: ['jpg','png','jpeg',' '],
                           size: 5120,
                           required: true
@@ -956,7 +1003,8 @@
                                  ref="file">
                           <label class="input__file-button" for="input__file8">
                             <div class="input__file-icon-wrapper">
-                              <img class="input__file-icon" src="/img/file.svg"
+                              <img class="input__file-icon" :src="valid?vin_glass_url:'/img/file.svg'" width="42"
+                                   height="42"
                                    alt="Выбрать файл">
                             </div>
                             <p class="text input__file-button-text"
@@ -991,8 +1039,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="white"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="white"/>
                           </svg>
                         </div>
                         <div class="photo__wrapper">
@@ -1000,8 +1048,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="white"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="white"/>
                           </svg>
                         </div>
                       </li>
@@ -1011,8 +1059,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="white"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="white"/>
                           </svg>
                         </div>
                         <div class="photo__wrapper">
@@ -1020,8 +1068,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="white"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="white"/>
                           </svg>
                         </div>
                         <div class="photo__wrapper">
@@ -1029,8 +1077,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="white"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="white"/>
                           </svg>
                         </div>
                         <div class="photo__wrapper">
@@ -1038,8 +1086,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="white"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="white"/>
                           </svg>
                         </div>
                       </li>
@@ -1049,8 +1097,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="black"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="black"/>
                           </svg>
                         </div>
                         <div class="photo__wrapper">
@@ -1058,8 +1106,8 @@
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
                             <path
-                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
-                              fill="black"/>
+                                d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                                fill="black"/>
                           </svg>
                         </div>
                       </li>
@@ -1084,8 +1132,8 @@
         <section class="step-four" v-if="step === 4">
           <div v-if="loading" style="display: flex; justify-content: center">
             <ClipLoader
-              color="#79B285FF"
-              :size="100"
+                color="#79B285FF"
+                :size="100"
             />
           </div>
           <div class="form" v-if="!loading">
@@ -1108,12 +1156,12 @@
                                              @click="pay_method==='bank_card'"><label for="bank_card">Банковской
                   картой</label>
                 </li>
-                <li class="pay__item"><input type="radio" name="face" value="" id="apple_pay"
-                                             @click="pay_method==='apple_pay'"><label for="apple_pay">Apple pay</label>
-                </li>
-                <li class="pay__item"><input type="radio" name="face" value="" id="google_pay"
-                                             @click="pay_method==='google_pay'"><label for="google_pay">Google
-                  pay</label></li>
+<!--                <li class="pay__item"><input type="radio" name="face" value="" id="apple_pay"-->
+<!--                                             @click="pay_method==='apple_pay'"><label for="apple_pay">Apple pay</label>-->
+<!--                </li>-->
+<!--                <li class="pay__item"><input type="radio" name="face" value="" id="google_pay"-->
+<!--                                             @click="pay_method==='google_pay'"><label for="google_pay">Google-->
+<!--                  pay</label></li>-->
                 <li class="pay__item"><input type="radio" name="face" value="" id="bank_transfer"
                                              @click="pay_method==='bank_transfer'"><label for="bank_transfer">Банковский
                   перевод</label></li>
@@ -1140,7 +1188,7 @@
             <path d="M2 11L11 20L29 2" stroke="#79B285" stroke-width="3" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
-          <p class="text__finish">Оплата прошла успешно!<br>
+          <p class="text__finish">Заявка успешно оформлена<br>
             Оформление ЭПТС длится от&nbsp;1&nbsp;до&nbsp;3&nbsp;дней.<br>
             ЭПТС будет отправлен на&nbsp;эл. почту, указанную при оформлении заявки.</p>
           <div class="home">
@@ -1155,8 +1203,10 @@
 </template>
 
 <script>
-import {required, digits, email, max, regex, ext, size} from 'vee-validate/dist/rules'
+import {required, digits, email, max, regex, ext, size, length} from 'vee-validate/dist/rules'
 import {extend, ValidationObserver, ValidationProvider, setInteractionMode} from 'vee-validate'
+import {mask} from 'vue-the-mask'
+
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -1183,7 +1233,7 @@ extend('max', {
 
 extend('regex', {
   ...regex,
-  message: '{_field_} {_value_} does not match {regex}',
+  message: 'Не валидный VIN номер',
 })
 
 extend('email', {
@@ -1191,59 +1241,70 @@ extend('email', {
   message: 'Не валидная почта',
 })
 
+
+extend('size', {
+  ...size,
+  message: 'Макс. допустимый размер 5 мб',
+})
+
+
 extend('ext', {
   ...ext,
   message: 'Необходим файл формата: .jpg, .png, .jpeg',
 })
 
-extend('size', {
-  ...size,
-  message: 'Максимально допустимый размер 5 мб',
+
+extend('length', {
+  ...length,
+  message: 'Не корректный VIN',
 })
+
 
 export default {
   name: "Order",
+  directives: {mask},
   components: {
     Footer,
     Header,
     ValidationProvider,
     ValidationObserver,
-    ClipLoader
+    ClipLoader,
   },
+
 
   data() {
     return {
       loading: false,
 
-      step: 0,
+      step: 5,
 
       type_owner: 1,
 
-      last_name: '',
-      first_name: '',
-      patronymic: '',
+      last_name: 'Иванов',
+      first_name: 'Никита',
+      patronymic: 'Эдуардович',
 
       org_name: '',
       kpp: '',
       ogrn: '',
 
-      city: '',
-      street: '',
-      home: null,
-      flat: null,
+      city: 'Челны',
+      street: 'Московский пр-т',
+      home: 1,
+      flat: 2,
 
-      pass_serial: null,
-      pass_number: null,
+      pass_serial: 1234,
+      pass_number: 123456,
 
-      inn: null,
-      snils: null,
+      inn: 12345678,
+      snils: 12345678,
 
-      phone: '',
-      email: '',
+      phone: '+7(960)059-49-25',
+      email: 'nikita@mail.ru',
 
       car_mark: '',
       commercial_name: '',
-      car_type: '',
+      car_type: 'Выберите тип',
       car_id: null,
       car_color: '',
       drive_ts: '',
@@ -1252,16 +1313,31 @@ export default {
       engine_number: '',
       engine_power: '',
       engine_volume: '',
-      fuel: '',
+      fuel: 'Топливо',
 
       sts_front: '',
+      sts_front_url: '',
+
       sts_back: '',
+      sts_back_url: '',
+
       ts_front: '',
+      ts_front_url: '',
+
       ts_back: '',
+      ts_back_url: '',
+
       ts_right: '',
+      ts_right_url: '',
+
       ts_left: '',
+      ts_left_url: '',
+
       vin_door: '',
+      vin_door_url: '',
+
       vin_glass: '',
+      vin_glass_url: '',
 
       price: 5000,
       pay_method: 'bank_card',
@@ -1290,27 +1366,36 @@ export default {
 
     sts_frontUpload(event) {
       this.sts_front = event.target.files[0];
+      this.sts_front_url = URL.createObjectURL(event.target.files[0]);
     },
     sts_backUpload(event) {
       this.sts_back = event.target.files[0];
+      this.sts_back_url = URL.createObjectURL(event.target.files[0]);
     },
     ts_frontUpload(event) {
       this.ts_front = event.target.files[0];
+      this.ts_front_url = URL.createObjectURL(event.target.files[0]);
+
     },
     ts_backUpload(event) {
       this.ts_back = event.target.files[0];
+      this.ts_back_url = URL.createObjectURL(event.target.files[0]);
     },
     ts_rightUpload(event) {
       this.ts_right = event.target.files[0];
+      this.ts_right_url = URL.createObjectURL(event.target.files[0]);
     },
     ts_leftUpload(event) {
       this.ts_left = event.target.files[0];
+      this.ts_left_url = URL.createObjectURL(event.target.files[0]);
     },
     vin_doorUpload(event) {
       this.vin_door = event.target.files[0];
+      this.vin_door_url = URL.createObjectURL(event.target.files[0]);
     },
     vin_glassUpload(event) {
       this.vin_glass = event.target.files[0];
+      this.vin_glass_url = URL.createObjectURL(event.target.files[0]);
     },
 
     postData() {
@@ -1364,13 +1449,13 @@ export default {
       }
 
       axios.post('http://127.0.0.1:8000/api/order/create', formData, config)
-        .then(res => {
-          this.loading = false
-          this.step = 5
-        })
-        .catch(err => {
-          this.loading = false
-        })
+          .then(res => {
+            this.loading = false
+            this.step = 5
+          })
+          .catch(err => {
+            this.loading = false
+          })
 
     }
   }

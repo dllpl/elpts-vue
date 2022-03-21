@@ -10,7 +10,8 @@
     "@saeris/vue-spinners": "^1.0.8",
     "axios": "^0.26.1",
     "vee-validate": "^3.4.14",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
     "@vue/cli-service": "~4.5.15",

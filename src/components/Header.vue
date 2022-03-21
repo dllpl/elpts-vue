@@ -11,16 +11,16 @@
     <div id="menu" class="burger__menu">
       <ul class="burger__list ul-reset">
         <li class="burger__item">
-          <a href="#" class="link">Главная</a>
+          <a href="https://gospts.ru/" class="link">Главная</a>
         </li>
         <li class="burger__item">
-          <a href="#" class="link">О системе</a>
+          <a href="https://gospts.ru/about/" class="link">О системе</a>
         </li>
         <li class="burger__item">
-          <a href="#" class="link">Оформить заявку</a>
+          <a href="" class="link">Оформить заявку</a>
         </li>
         <li class="burger__item">
-          <a href="#" class="link">Сотрудничество</a>
+          <a href="https://gospts.ru/affiliate/" class="link">Сотрудничество</a>
         </li>
       </ul>
     </div>
@@ -31,16 +31,16 @@
     <nav class="heder__nav nav">
       <ul class="nav__list">
         <li class="nav__item">
-          <a href="#" class="link link--nav">Главная</a>
+          <a href="https://gospts.ru/" class="link link--nav">Главная</a>
         </li>
         <li class="nav__item">
-          <a href="#" class="link link--nav">О системе</a>
+          <a href="https://gospts.ru/about/" class="link link--nav">О системе</a>
         </li>
         <li class="nav__item">
           <a href="#" class="link link--nav">Оформить заявку</a>
         </li>
         <li class="nav__item">
-          <a href="#" class="link link--nav">Сотрудничество</a>
+          <a href="https://gospts.ru/affiliate/" class="link link--nav">Сотрудничество</a>
         </li>
       </ul>
     </nav>
