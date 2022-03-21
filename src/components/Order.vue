@@ -1448,7 +1448,7 @@ export default {
         }
       }
 
-      axios.post('http://127.0.0.1:8000/api/order/create', formData, config)
+      axios.post('http://admin.gospts.ru/api/order/create', formData, config)
           .then(res => {
             this.loading = false
             this.step = 5
