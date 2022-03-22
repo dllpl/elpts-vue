@@ -48,7 +48,7 @@
               <li class="application-left__item four">
                 <h3 class="application-left__title title ">Оплата и&nbsp;отправка заявки</h3>
                 <p class="text">Стоимость услуги составляет 5&nbsp;000&nbsp;рублей.
-                  Оплатить можно банковской картой, Apple Pay, Google Pay</p>
+                  Оплатить можно банковской картой или банковским переводом</p>
               </li>
               <li class="application-left__item five">
                 <h3 class="application-left__title title ">Получение ЭПТС</h3>
@@ -67,7 +67,7 @@
                 <li class="application-right__item text">У&nbsp;вас нет автомобиля</li>
                 <li class="application-right__item text">У&nbsp;вас уже есть ЭПТС</li>
               </ul>
-              <a href="#" class="link link--question">Ответы на&nbsp;частые вопросы</a>
+              <a href="https://gospts.ru/about/" class="link link--question">Ответы на&nbsp;частые вопросы</a>
             </div>
           </div>
 
@@ -92,7 +92,7 @@
                     rules="required"
                 >
                   <input type="radio" value="" :checked="type_owner===1" @change="type_owner=1" id="type_fiz"><label
-                    for="type_fiz" style="margin-right: 5px">Физическое
+                    for="type_fiz" style="margin-right: 20px">Физическое
                   лицо</label>
                 </validation-provider>
                 <validation-provider
@@ -607,10 +607,15 @@
                           v-slot="{ errors }"
                           name="Привод ТС"
                           rules="required"
-                          class=""
                       >
-                        <input class="input" type="text" name="vehicle" placeholder="Привод ТС"
-                               v-model="drive_ts">
+                        <select class="input" type="text" 
+                                v-model="drive_ts">
+                            <option disabled selected>Выберите тип</option>
+                            <option value="Передний">Передний</option>
+                            <option value="Задний">Задний</option>
+                            <option value="Полный">Полный</option>
+                        </select>
+                        
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -1276,38 +1281,38 @@ export default {
     return {
       loading: false,
 
-      step: 5,
+      step: 0,
 
       type_owner: 1,
 
-      last_name: 'Иванов',
-      first_name: 'Никита',
-      patronymic: 'Эдуардович',
+      last_name: '',
+      first_name: '',
+      patronymic: '',
 
       org_name: '',
       kpp: '',
       ogrn: '',
 
-      city: 'Челны',
-      street: 'Московский пр-т',
-      home: 1,
-      flat: 2,
+      city: '',
+      street: '',
+      home: null,
+      flat: null,
 
-      pass_serial: 1234,
-      pass_number: 123456,
+      pass_serial: null,
+      pass_number: null,
 
-      inn: 12345678,
-      snils: 12345678,
+      inn: null,
+      snils: null,
 
-      phone: '+7(960)059-49-25',
-      email: 'nikita@mail.ru',
+      phone: '',
+      email: '',
 
       car_mark: '',
       commercial_name: '',
       car_type: 'Выберите тип',
       car_id: null,
       car_color: '',
-      drive_ts: '',
+      drive_ts: 'Выберите тип',
 
       engine_model: '',
       engine_number: '',
@@ -1448,7 +1453,7 @@ export default {
         }
       }
 
-      axios.post('http://admin.gospts.ru/api/order/create', formData, config)
+      axios.post('https://admin.gospts.ru/api/order/create', formData, config)
           .then(res => {
             this.loading = false
             this.step = 5
