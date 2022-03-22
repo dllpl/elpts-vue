@@ -985,6 +985,9 @@ input {
     body {
         font-size: 14px;
     }
+    .form__input {
+        display: block;
+    }
 
     .container {
         max-width: 1110px;
