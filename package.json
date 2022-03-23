@@ -11,6 +11,7 @@
     "axios": "^0.26.1",
     "vee-validate": "^3.4.14",
     "vue": "^2.6.11",
+    "vue-js-modal": "^2.0.1",
     "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
