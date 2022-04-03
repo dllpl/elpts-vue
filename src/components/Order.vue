@@ -1502,8 +1502,15 @@ export default {
 
       axios.post('https://admin.gospts.ru/api/order/create', formData, config)
           .then(res => {
+            let order_id = res.data.order_id
+            let data = {
+              'order_id': order_id
+            }
             this.loading = false
-            this.step = 5
+            axios.post('https://admin.gospts.ru/api/pay', data)
+            .then(res=>{
+              window.location.replace(res.data.url)
+            })
           })
           .catch(err => {
             this.loading = false
