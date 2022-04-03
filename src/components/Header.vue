@@ -31,20 +31,20 @@
     <nav class="heder__nav nav">
       <ul class="nav__list">
         <li class="nav__item">
-          <a href="https://gospts.ru/" class="link link--nav">Главная</a>
+          <a href="https://gospts.ru/" class="link link--nav" target="_blank">Главная</a>
         </li>
         <li class="nav__item">
-          <a href="https://gospts.ru/about/" class="link link--nav">О системе</a>
+          <a href="https://gospts.ru/about/" class="link link--nav" target="_blank">О системе</a>
         </li>
         <li class="nav__item">
           <a href="#" class="link link--nav">Оформить заявку</a>
         </li>
         <li class="nav__item">
-          <a href="https://gospts.ru/affiliate/" class="link link--nav">Сотрудничество</a>
+          <a href="https://gospts.ru/affiliate/" class="link link--nav" target="_blank">Сотрудничество</a>
         </li>
       </ul>
     </nav>
-    <a href="tel:8 800 250 12 01" class="header__phone link">
+    <a href="tel:88002501201" class="header__phone link">
       <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M14.25 7.71875H13.0625C13.062 7.24648 12.8742 6.79368 12.5403 6.45974C12.2063 6.12579 11.7535 5.93797 11.2812 5.9375V4.75C12.0683 4.75094 12.8229 5.06402 13.3794 5.62057C13.936 6.17711 14.2491 6.93168 14.25 7.71875Z"

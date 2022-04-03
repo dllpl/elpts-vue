@@ -13,10 +13,10 @@
           <a href="" class="footer__link link link--footer">Главная</a>
         </li>
         <li class="footer__item">
-          <a href="" class="link link--footer">Сотрудничество</a>
+          <a href="https://gospts.ru/affiliate/" class="link link--footer" target="_blank">Сотрудничество</a>
         </li>
         <li class="footer__item">
-          <a href="" class="link link--footer">О сервисе</a>
+          <a href="https://gospts.ru/about/" class="link link--footer" target="_blank">О сервисе</a>
         </li>
         <li class="footer__item">
           <a href="" class="link link--footer">Оформление ЭПТС</a>
@@ -27,10 +27,10 @@
           <a href="" class="footer__link link link--footer">Полезное</a>
         </li>
         <li class="footer__item">
-          <a href="" class="link link--footer">Политика конфиденциальности</a>
+          <a href="https://gospts.ru/politic.pdf" class="link link--footer" target="_blank">Политика конфиденциальности</a>
         </li>
         <li class="footer__item">
-          <a href="" class="link link--footer">Публичная офера</a>
+          <a href="https://gospts.ru/politic.pdf" class="link link--footer" target="_blank">Публичная офера</a>
         </li>
       </ul>
       <ul class="footer__list">
@@ -38,7 +38,7 @@
           <a href="" class="footer__link link link--footer">Помощь</a>
         </li>
         <li class="footer__item">
-          <a href="" class="link link--footer">Вопросы и ответы</a>
+          <a href="https://gospts.ru/about/" class="link link--footer" target="_blank">Вопросы и ответы</a>
         </li>
         <li class="footer__item">
           <a href="" class="link link--footer">Контакты</a>

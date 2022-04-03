@@ -71,7 +71,7 @@
             </div>
           </div>
 
-          <button class="btn btn--big" @click="step = step+1">Начать заполнение заявки</button>
+          <button class="btn btn--big" @click="stepNext">Начать заполнение заявки</button>
 
         </div>
       </section>
@@ -512,12 +512,12 @@
                       <validation-provider
                           v-slot="{ errors }"
                           name="Тип ТС"
-                          rules="required"
+                          rules="required|excluded:0"
                           style="width: 100%"
                       >
-                        <select class="input" name="type"
+                        <select class="input"
                                 v-model="car_type">
-                          <option selected disabled>Выберите тип</option>
+                          <option value="0">Выберите тип</option>
                           <option value="Легковой">Легковой</option>
                           <option value="Грузовой">Грузовой</option>
                           <option value="Мотоцикл">Мотоцикл</option>
@@ -606,16 +606,16 @@
                       <validation-provider
                           v-slot="{ errors }"
                           name="Привод ТС"
-                          rules="required"
+                          rules="required|excluded:0"
                       >
-                        <select class="input" type="text" 
+                        <select class="input"
                                 v-model="drive_ts">
-                            <option disabled selected>Выберите тип</option>
+                          <option value="0">Выберите тип</option>
                             <option value="Передний">Передний</option>
                             <option value="Задний">Задний</option>
                             <option value="Полный">Полный</option>
                         </select>
-                        
+
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -649,13 +649,13 @@
                       <validation-provider
                           v-slot="{ errors }"
                           name="Топливо"
-                          rules="required"
+                          rules="required|excluded:0"
                           class="input--xs"
                       >
-                        <select class="input" type="text"
+                        <select class="input"
                                 v-model="fuel">
-                          <option disabled selected>Топливо</option>
-                          <option value="Бензин">Бензин</option>
+                          <option value="0">Выберите тип</option>
+                          <option value="Бензин" selected>Бензин</option>
                           <option value="Дизель">Дизель</option>
 
                         </select>
@@ -1250,7 +1250,7 @@
 </template>
 
 <script>
-import {required, digits, email, max, regex, ext, size, length} from 'vee-validate/dist/rules'
+import {required, digits, email, max, regex, ext, size, length, excluded} from 'vee-validate/dist/rules'
 import {extend, ValidationObserver, ValidationProvider, setInteractionMode} from 'vee-validate'
 import {mask} from 'vue-the-mask'
 
@@ -1266,6 +1266,11 @@ setInteractionMode('eager')
 extend('digits', {
   ...digits,
   message: '{_field_} needs to be {length} digits. ({_value_})',
+})
+
+extend('excluded', {
+  ...excluded,
+  message: 'Выберите возможный вариант',
 })
 
 extend('required', {
@@ -1323,7 +1328,7 @@ export default {
     return {
       loading: false,
 
-      step: 3,
+      step: 0,
 
       type_owner: 1,
 
@@ -1351,16 +1356,16 @@ export default {
 
       car_mark:'',
       commercial_name: '',
-      car_type: 'Выберите тип',
+      car_type: 0,
       car_id: null,
       car_color: '',
-      drive_ts: 'Выберите тип',
+      drive_ts: 0,
 
       engine_model: '',
       engine_number: '',
       engine_power: '',
       engine_volume: '',
-      fuel: 'Топливо',
+      fuel: 0,
 
       sts_front: '',
       sts_front_url: '',
