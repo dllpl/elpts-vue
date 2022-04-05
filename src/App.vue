@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <Order/>
+    <Header/>
+    <main class="container">
+    <router-view></router-view>
+    </main>
+    <Footer/>
   </div>
 </template>
 
 <script>
-
-
-import Order from "./components/Order";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 export default {
   name: 'App',
   components: {
-    Order,
+    Header, Footer
   }
 }
 </script>

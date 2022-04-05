@@ -1,8 +1,7 @@
 <template>
   <div>
-    <Header/>
     <main class="container">
-      <section class="step-five" v-if="step === 5">
+      <section class="step-five">
         <div class="form">
           <h2 class="form__title title title--green">Оплата и&nbsp;отправка заявки</h2>
           <svg width="53" height="35" viewBox="0 0 31 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,18 +12,17 @@
             Оформление ЭПТС длится от&nbsp;1&nbsp;до&nbsp;3&nbsp;дней.<br>
             ЭПТС будет отправлен на&nbsp;эл. почту, указанную при оформлении заявки.</p>
           <div class="home">
-            <a href="#" class="link link--home">Вернуться на Главную ›</a>
+            <a href="https://gospts.ru" class="link link--home">Вернуться на Главную ›</a>
           </div>
         </div>
       </section>
     </main>
-    <Footer/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "PayFinish"
+  name: "PayFinish",
 }
 </script>
 
