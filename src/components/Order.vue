@@ -1498,7 +1498,14 @@ export default {
           .then(res => {
             let order_id = res.data.order_id
             let data = {
-              'order_id': order_id
+              'order_id': order_id,
+              'type_owner': this.type_owner,
+              'email': this.email,
+              'phone': this.phone,
+              'last_name': this.last_name,
+              'first_name': this.first_name,
+              'patronymic': this.patronymic,
+              'org_name': this.org_name
             }
             this.loading = false
             axios.post('https://admin.gospts.ru/api/pay', data)
