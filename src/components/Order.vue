@@ -2,30 +2,30 @@
   <div>
 
     <section class="step">
-      <h1 class="step__title title title--big" v-if="step===0">Как пройдут следующие 15&nbsp;минут?</h1>
+      <h1 class="step__title title title--big" v-if="form.step===0">Как пройдут следующие 15&nbsp;минут?</h1>
       <ul class="step__list">
         <li class="step__item">
-          <button class="btn btn--step" :class="{'btn--step-active': step ===0}">Ознакомление</button>
+          <button class="btn btn--step" :class="{'btn--step-active': form.step ===0}">Ознакомление</button>
         </li>
         <li class="step__item">
-          <button class="btn btn--step" :class="{'btn--step-active': step ===1}">Шаг 1</button>
+          <button class="btn btn--step" :class="{'btn--step-active': form.step ===1}">Шаг 1</button>
         </li>
         <li class="step__item">
-          <button class="btn btn--step" :class="{'btn--step-active': step ===2}">Шаг 2</button>
+          <button class="btn btn--step" :class="{'btn--step-active': form.step ===2}">Шаг 2</button>
         </li>
         <li class="step__item">
-          <button class="btn btn--step" :class="{'btn--step-active': step ===3}">Шаг 3</button>
+          <button class="btn btn--step" :class="{'btn--step-active': form.step ===3}">Шаг 3</button>
         </li>
         <li class="step__item">
-          <button class="btn btn--step" :class="{'btn--step-active': step ===4}">Шаг 4</button>
+          <button class="btn btn--step" :class="{'btn--step-active': form.step ===4}">Шаг 4</button>
         </li>
         <li class="step__item">
-          <button class="btn btn--step" :class="{'btn--step-active': step ===5}">Шаг 5</button>
+          <button class="btn btn--step" :class="{'btn--step-active': form.step ===5}">Шаг 5</button>
         </li>
       </ul>
     </section>
 
-    <section class="application" v-if="step === 0">
+    <section class="application" v-if="form.step === 0">
       <div class="form">
         <div class="form__center">
           <ul class="form__left">
@@ -75,10 +75,10 @@
       </div>
     </section>
 
-    <form @submit.prevent="submit">
 
 
-      <section class="step-one" v-if="step === 1">
+
+      <section class="step-one" v-if="form.step === 1">
         <div class="form">
           <h2 class="form__title title title--green">Сведения о&nbsp;заявителе</h2>
 
@@ -90,7 +90,8 @@
                   name="radio"
                   rules="required"
               >
-                <input type="radio" value="" :checked="type_owner===1" @change="type_owner=1" id="type_fiz"><label
+                <input type="radio" value="" :checked="form.type_owner===1" @change="form.type_owner=1"
+                       id="type_fiz"><label
                   for="type_fiz" style="margin-right: 20px">Физическое
                 лицо</label>
               </validation-provider>
@@ -99,7 +100,8 @@
                   name="radio"
                   rules="required"
               >
-                <input type="radio" value="" :checked="type_owner===2" @change="type_owner=2" id="type_yur"><label
+                <input type="radio" value="" :checked="form.type_owner===2" @change="form.type_owner=2"
+                       id="type_yur"><label
                   for="type_yur">Юридическое
                 лицо</label>
               </validation-provider>
@@ -109,8 +111,8 @@
               ref="observer"
               v-slot="{ invalid, valid }"
           >
-            <div class="form__fiz face-fiz" :class="{'face-active':type_owner===1}"
-                 v-if="type_owner===1">
+            <div class="form__fiz face-fiz" :class="{'face-active':form.type_owner===1}"
+                 v-if="form.type_owner===1">
               <div class="form__center">
 
                 <div class="form__left">
@@ -124,7 +126,7 @@
                       >
                         <input class="input" type="text" name="family" placeholder="Фамилия"
 
-                               v-model="last_name">
+                               v-model="form.last_name">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -133,7 +135,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="name" placeholder="Имя"
-                               v-model="first_name">
+                               v-model="form.first_name">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -142,7 +144,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" placeholder="Отчество"
-                               v-model="patronymic">
+                               v-model="form.patronymic">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -157,7 +159,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="city"
-                               placeholder="Населенный пункт" v-model="city">
+                               placeholder="Населенный пункт" v-model="form.city">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -166,7 +168,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="street" placeholder="Улица"
-                               v-model="street">
+                               v-model="form.street">
                         <p style="color:red">{{ errors[0] }}</p>
 
                       </validation-provider>
@@ -176,7 +178,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="house" placeholder="Дом"
-                               v-model="home">
+                               v-model="form.home">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -185,10 +187,9 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="flat" placeholder="Квартира"
-                               v-model="flat">
+                               v-model="form.flat">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
-
                     </div>
                   </div>
                 </div>
@@ -202,7 +203,7 @@
                           rules="required"
                       >
                         <input v-mask="['####']" class="input" type="text" name="series" placeholder="Серия"
-                               v-model="pass_serial">
+                               v-model="form.pass_serial">
                         <p style="color:red">{{ errors[0] }}</p>
 
                       </validation-provider>
@@ -212,36 +213,95 @@
                           rules="required"
                       >
                         <input v-mask="['######']" class="input" type="text" name="number" placeholder="Номер"
-                               v-model="pass_number">
+                               v-model="form.pass_number">
                         <p style="color:red">{{ errors[0] }}</p>
 
                       </validation-provider>
                     </div>
+                    <ValidationProvider
+                        v-slot="{ errors, validate, valid }"
+                        :rules="{
+                          ext: ['jpg','png','jpeg',' '],
+                          size: 5120,
+                          required: true
+                        }">
+                      <input type="file" class="input__file" id="input__file__pass" @input="pass_upload"
+                             @change="validate"
+                             ref="file">
+
+                      <label class="input__file-button" for="input__file__pass">
+                        <div class="input__file-icon-wrapper">
+                          <img class="input__file-icon" :src="(valid?form.pass_photo_url:'/img/file.svg')" width="42"
+                               height="42"
+                               alt="Выбрать файл">
+                        </div>
+                        <p class="text input__file-button-text"
+                           :class="{'text--done':!valid}">
+                          Фото главной страницы паспорта<br>
+                          <span class="text text--grey">(.jpg, .png, .jpeg  )</span>
+                        </p>
+                        <p class="text input__file-button-text"
+                           :class="{'text--done':valid}">
+                          Загружено</p>
+
+                        <div class="input__file-icon-wrapper done"
+                             :class="{'done--active':valid}">
+                          <img class="input__file-icon" src="/img/icon/done.svg"
+                               alt="Выбрать файл">
+                        </div>
+                      </label>
+                      <span style="color:red">{{ errors[0] }}</span>
+                    </ValidationProvider>
                   </div>
 
-
                   <div class="form__item">
-                    <h3 class="form__name title">ИНН и СНИЛС</h3>
+                    <h3 class="form__name title">СНИЛС</h3>
                     <div class="form__input">
-                      <validation-provider
-                          v-slot="{ errors }"
-                          name="ИНН"
-                          rules="required"
-                      >
-                        <input v-mask="['############']" class="input" type="text" name="inn" placeholder="ИНН"
-                               v-model="inn">
-                        <p style="color:red">{{ errors[0] }}</p>
-                      </validation-provider>
                       <validation-provider
                           v-slot="{ errors }"
                           name="СНИЛС"
                           rules="required"
+                          style="width: 100%"
                       >
                         <input v-mask="['###-###-### ##']" class="input" type="text" name="snils" placeholder="СНИЛС"
-                               v-model="snils">
+                               v-model="form.snils">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
+                    <ValidationProvider
+                        v-slot="{ errors, validate, valid }"
+                        :rules="{
+                          ext: ['jpg','png','jpeg',' '],
+                          size: 5120,
+                          required: true
+                        }">
+                      <input type="file" class="input__file" id="input__file__snils" @input="snils_upload"
+                             @change="validate"
+                             ref="file">
+
+                      <label class="input__file-button" for="input__file__snils">
+                        <div class="input__file-icon-wrapper">
+                          <img class="input__file-icon" :src="(valid?form.snils_photo:'/img/file.svg')" width="42"
+                               height="42"
+                               alt="Выбрать файл">
+                        </div>
+                        <p class="text input__file-button-text"
+                           :class="{'text--done':!valid}">
+                          Фото СНИЛС<br>
+                          <span class="text text--grey">(.jpg, .png, .jpeg  )</span>
+                        </p>
+                        <p class="text input__file-button-text"
+                           :class="{'text--done':valid}">
+                          Загружено</p>
+
+                        <div class="input__file-icon-wrapper done"
+                             :class="{'done--active':valid}">
+                          <img class="input__file-icon" src="/img/icon/done.svg"
+                               alt="Выбрать файл">
+                        </div>
+                      </label>
+                      <span style="color:red">{{ errors[0] }}</span>
+                    </ValidationProvider>
                   </div>
 
                   <div class="form__item">
@@ -254,7 +314,7 @@
                       >
                         <input v-mask="['+7(###)###-##-##']" class="input" type="text" name="phone"
                                placeholder="+7(___)___-__-__"
-                               v-model="phone">
+                               v-model="form.phone">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -263,7 +323,7 @@
                           rules="required|email"
                       >
                         <input class="input" type="text" name="mail" placeholder="Эл. почта"
-                               v-model="email">
+                               v-model="form.email">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -287,7 +347,7 @@
                   </div>
                 </div>
               </div>
-              <section v-if="step>0 && step<5">
+              <section v-if="form.step>0 && form.step<5">
                 <div class="form__bottom ">
                   <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
                   <button class="btn btn--next" @click="stepNext" :disabled="invalid"
@@ -299,8 +359,8 @@
             </div>
           </validation-observer>
 
-          <div class="form__jur face-jur" :class="{'face-active':type_owner===2}"
-               v-if="type_owner===2">
+          <div class="form__jur face-jur" :class="{'face-active':form.type_owner===2}"
+               v-if="form.type_owner===2">
             <validation-observer
                 ref="observer"
                 v-slot="{ invalid, valid }"
@@ -318,7 +378,7 @@
                       >
                         <input class="input" type="text" name="name_org"
                                placeholder="Название организации"
-                               v-model="org_name">
+                               v-model="form.org_name">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -333,7 +393,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="city"
-                               placeholder="Населенный пункт" v-model="city">
+                               placeholder="Населенный пункт" v-model="form.city">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -342,7 +402,7 @@
                           rules="required"
                       >
                         <input class="input " type="text" name="street" placeholder="Улица"
-                               v-model="street">
+                               v-model="form.street">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -351,7 +411,7 @@
                           rules="required"
                       >
                         <input class="input " type="text" name="house" placeholder="Дом"
-                               v-model="home">
+                               v-model="form.home">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -360,7 +420,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="flat" placeholder="Квартира"
-                               v-model="flat">
+                               v-model="form.flat">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -376,7 +436,7 @@
                       >
                         <input v-mask="['+7(###)###-##-##']" class="input" type="text" name="phone_yur"
                                placeholder="+7(___)___-__-__"
-                               v-model="phone">
+                               v-model="form.phone">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -385,7 +445,7 @@
                           rules="required|email"
                       >
                         <input class="input" type="text" name="mail" placeholder="Эл. почта"
-                               v-model="email">
+                               v-model="form.email">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -401,7 +461,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="inn" placeholder="ИНН" v-mask="['##########']"
-                               v-model="inn">
+                               v-model="form.inn">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -410,7 +470,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="kpp" placeholder="КПП" v-mask="['#########']"
-                               v-model="kpp">
+                               v-model="form.kpp">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                       <validation-provider
@@ -419,7 +479,7 @@
                           rules="required"
                       >
                         <input class="input" type="text" name="ogrn" placeholder="ОГРН" v-mask="['#############']"
-                               v-model="ogrn">
+                               v-model="form.ogrn">
                         <p style="color:red">{{ errors[0] }}</p>
                       </validation-provider>
                     </div>
@@ -443,7 +503,7 @@
                   <p style="color:red">{{ errors[0] }}</p>
                 </validation-provider>
               </div>
-              <section v-if="step>0 && step<5">
+              <section v-if="form.step>0 && form.step<5">
                 <div class="form__bottom ">
                   <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
                   <button class="btn btn--next" @click="stepNext" :disabled="invalid"
@@ -459,7 +519,7 @@
       </section>
 
 
-      <section class="step-two" v-if="step === 2">
+      <section class="step-two" v-if="form.step === 2">
         <validation-observer
             ref="observer"
             v-slot="{ invalid, valid }"
@@ -479,7 +539,7 @@
                   >
                     <input class="input" type="text" name="brand"
                            placeholder="Марка и модификация ТС"
-                           v-model="car_mark">
+                           v-model="form.car_mark">
                     <p style="color:red">{{ errors[0] }}</p>
 
                   </validation-provider>
@@ -497,7 +557,7 @@
                       style="width: 100%"
                   >
                     <input class="input" type="text" name="Commerс-name"
-                           placeholder="Коммерческое наименование" v-model="commercial_name">
+                           placeholder="Коммерческое наименование" v-model="form.commercial_name">
                     <p style="color:red">{{ errors[0] }}</p>
                   </validation-provider>
                 </div>
@@ -515,7 +575,7 @@
                         style="width: 100%"
                     >
                       <select class="input"
-                              v-model="car_type">
+                              v-model="form.car_type">
                         <option value="0">Выберите тип</option>
                         <option value="Легковой">Легковой</option>
                         <option value="Грузовой">Грузовой</option>
@@ -548,7 +608,7 @@
                     >
                       <input class="input" type="text" name="id-number"
                              placeholder="Идентификационный номер"
-                             v-model="car_id">
+                             v-model="form.car_id">
                       <p style="color:red">{{ errors[0] }}</p>
                     </validation-provider>
                   </div>
@@ -564,7 +624,7 @@
                         class="input--s"
                     >
                       <input class="input " type="text" name="model" placeholder="Модель"
-                             v-model="engine_model">
+                             v-model="form.engine_model">
                       <p style="color:red">{{ errors[0] }}</p>
                     </validation-provider>
                     <validation-provider
@@ -574,7 +634,7 @@
                         class="input--s"
                     >
                       <input class="input " type="text" name="engine-number"
-                             placeholder="Номер двигателя" v-model="engine_number">
+                             placeholder="Номер двигателя" v-model="form.engine_number">
                       <p style="color:red">{{ errors[0] }}</p>
                     </validation-provider>
                   </div>
@@ -593,7 +653,7 @@
                         class=""
                     >
                       <input class="input" type="text" name="color" placeholder="Цвет кузова"
-                             v-model="car_color">
+                             v-model="form.car_color">
                       <p style="color:red">{{ errors[0] }}</p>
                     </validation-provider>
                   </div>
@@ -608,7 +668,7 @@
                         rules="required|excluded:0"
                     >
                       <select class="input"
-                              v-model="drive_ts">
+                              v-model="form.drive_ts">
                         <option value="0">Выберите тип</option>
                         <option value="Передний">Передний</option>
                         <option value="Задний">Задний</option>
@@ -631,7 +691,7 @@
                     >
                       <input class="input" type="text" name="power" placeholder="Мощность, л.с."
                              v-mask="['###', '##', '####']"
-                             v-model="engine_power">
+                             v-model="form.engine_power">
                       <p style="color:red">{{ errors[0] }}</p>
                     </validation-provider>
                     <validation-provider
@@ -642,7 +702,7 @@
                     >
                       <input class="input" type="text" name="volume" placeholder="Объем, см3"
                              v-mask="['###', '##', '####']"
-                             v-model="engine_volume">
+                             v-model="form.engine_volume">
                       <p style="color:red">{{ errors[0] }}</p>
                     </validation-provider>
                     <validation-provider
@@ -652,7 +712,7 @@
                         class="input--xs"
                     >
                       <select class="input"
-                              v-model="fuel">
+                              v-model="form.fuel">
                         <option value="0">Выберите тип</option>
                         <option value="Бензин" selected>Бензин</option>
                         <option value="Дизель">Дизель</option>
@@ -665,7 +725,7 @@
               </div>
             </div>
           </div>
-          <section v-if="step>0 && step<5">
+          <section v-if="form.step>0 && form.step<5">
             <p style="color: red; margin: 5px 5px" v-if="!valid">Пожалуйста, заполните все поля</p>
             <div class="form__bottom ">
               <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
@@ -679,7 +739,7 @@
         </validation-observer>
       </section>
 
-      <section class="step-three" v-if="step === 3">
+      <section class="step-three" v-show="form.step === 3">
         <validation-observer
             ref="observer"
             v-slot="{valid}"
@@ -701,7 +761,6 @@
               </div>
             </div>
             <div class="form__center">
-
               <div class="form__left">
                 <div class="form__item">
                   <h3 class="form__name title">Фото СТС (лицевая)</h3>
@@ -720,7 +779,7 @@
 
                         <label class="input__file-button" for="input__file1">
                           <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?sts_front_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="(valid?form.sts_front_url:'/img/file.svg')" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -746,7 +805,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото СТС (обратная)</h3>
+                  <h3 class="form__name title">Фото CТС (обратная)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -761,7 +820,7 @@
                                ref="file">
                         <label class="input__file-button" for="input__file2">
                           <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?sts_back_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="valid?form.sts_back_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -786,7 +845,91 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (спереди)</h3>
+                  <h3 class="form__name title">Фото ПТС (лицевая)</h3>
+                  <div class="">
+                    <div class="input__wrapper">
+                      <ValidationProvider
+                          v-slot="{ errors, validate, valid }"
+                          :rules="{
+                          ext: ['jpg','png','jpeg',' '],
+                          size: 5120,
+                          required: true
+                        }">
+                        <input type="file" class="input__file" id="input__file1_1" @input="pts_frontUpload"
+                               @change="validate"
+                               ref="file">
+
+                        <label class="input__file-button" for="input__file1_1">
+                          <div class="input__file-icon-wrapper">
+                            <img class="input__file-icon" :src="(valid?form.pts_front_url:'/img/file.svg')" width="42"
+                                 height="42"
+                                 alt="Выбрать файл">
+                          </div>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':!valid}">
+                            Загрузить<br>
+                            <span class="text text--grey">(.jpg, .png, .jpeg  )</span>
+                          </p>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':valid}">
+                            Загружено</p>
+
+                          <div class="input__file-icon-wrapper done"
+                               :class="{'done--active':valid}">
+                            <img class="input__file-icon" src="/img/icon/done.svg"
+                                 alt="Выбрать файл">
+                          </div>
+                        </label>
+                        <span style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__item">
+                  <h3 class="form__name title">Фото ПТС (обратная)</h3>
+                  <div class="">
+                    <div class="input__wrapper">
+                      <ValidationProvider
+                          v-slot="{ errors, validate, valid }"
+                          :rules="{
+                          ext: ['jpg','png','jpeg',' '],
+                          size: 5120,
+                          required: true
+                        }">
+                        <input type="file" class="input__file" id="input__file1_2" @input="pts_backUpload"
+                               @change="validate"
+                               ref="file">
+
+                        <label class="input__file-button" for="input__file1_2">
+                          <div class="input__file-icon-wrapper">
+                            <img class="input__file-icon" :src="(valid?form.pts_back_url:'/img/file.svg')" width="42"
+                                 height="42"
+                                 alt="Выбрать файл">
+                          </div>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':!valid}">
+                            Загрузить<br>
+                            <span class="text text--grey">(.jpg, .png, .jpeg  )</span>
+                          </p>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':valid}">
+                            Загружено</p>
+
+                          <div class="input__file-icon-wrapper done"
+                               :class="{'done--active':valid}">
+                            <img class="input__file-icon" src="/img/icon/done.svg"
+                                 alt="Выбрать файл">
+                          </div>
+                        </label>
+                        <span style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__item">
+                  <h3 class="form__name title">Фото ТС (по диагонали 1/4)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -801,7 +944,7 @@
                                ref="file">
                         <label class="input__file-button" for="input__file3">
                           <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?ts_front_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="valid?form.ts_front_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -826,7 +969,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (сзади)</h3>
+                  <h3 class="form__name title">Фото ТС (по диагонали 2/4)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -840,7 +983,7 @@
                                ref="file" @change="validate">
                         <label class="input__file-button" for="input__file4">
                           <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?ts_back_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="valid?form.ts_back_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -866,7 +1009,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (справа)</h3>
+                  <h3 class="form__name title">Фото ТС (по диагонали 3/4)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -881,7 +1024,7 @@
                                ref="file">
                         <label class="input__file-button" for="input__file5">
                           <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?ts_right_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="valid?form.ts_right_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -908,7 +1051,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (слева)</h3>
+                  <h3 class="form__name title">Фото ТС (по диагонали 4/4)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -922,7 +1065,7 @@
                                ref="file" @change="validate">
                         <label class="input__file-button" for="input__file6">
                           <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?ts_left_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="valid?form.ts_left_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -965,7 +1108,7 @@
                         <label class="input__file-button" for="input__file7">
                           <div class="input__file-icon-wrapper"
                           >
-                            <img class="input__file-icon" :src="valid?vin_door_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="valid?form.vin_door_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -1007,7 +1150,90 @@
                                ref="file">
                         <label class="input__file-button" for="input__file8">
                           <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?vin_glass_url:'/img/file.svg'" width="42"
+                            <img class="input__file-icon" :src="valid?form.vin_glass_url:'/img/file.svg'" width="42"
+                                 height="42"
+                                 alt="Выбрать файл">
+                          </div>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':!valid}"
+                          >Загрузить<br>
+                            <span class="text text--grey">(.jpg, .png, .jpeg  )</span>
+                          </p>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':valid}"
+                          >Загружено</p>
+
+                          <div class="input__file-icon-wrapper done"
+                               :class="{'done--active':valid}"
+                          >
+                            <img class="input__file-icon" src="/img/icon/done.svg"
+                                 alt="Выбрать файл">
+                          </div>
+                        </label>
+                        <span style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="form__item">
+                  <h3 class="form__name title">Фото размерности шины</h3>
+                  <form class="">
+                    <div class="input__wrapper">
+                      <ValidationProvider
+                          v-slot="{ errors, validate, valid }"
+                          :rules="{
+                          ext: ['jpg','png','jpeg',' '],
+                          size: 5120,
+                          required: true
+                        }">
+                        <input type="file" class="input__file" id="input__file9" v-on:change="tire_Upload"
+                               @change="validate"
+                               ref="file">
+                        <label class="input__file-button" for="input__file9">
+                          <div class="input__file-icon-wrapper">
+                            <img class="input__file-icon" :src="valid?form.tire_url:'/img/file.svg'" width="42"
+                                 height="42"
+                                 alt="Выбрать файл">
+                          </div>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':!valid}"
+                          >Загрузить<br>
+                            <span class="text text--grey">(.jpg, .png, .jpeg  )</span>
+                          </p>
+                          <p class="text input__file-button-text"
+                             :class="{'text--done':valid}"
+                          >Загружено</p>
+
+                          <div class="input__file-icon-wrapper done"
+                               :class="{'done--active':valid}"
+                          >
+                            <img class="input__file-icon" src="/img/icon/done.svg"
+                                 alt="Выбрать файл">
+                          </div>
+                        </label>
+                        <span style="color:red">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                  </form>
+                </div>
+                <div class="form__item">
+                  <h3 class="form__name title">Фото таблички размерности шин у водительской двери</h3>
+                  <form class="">
+                    <div class="input__wrapper">
+                      <ValidationProvider
+                          v-slot="{ errors, validate, valid }"
+                          :rules="{
+                          ext: ['jpg','png','jpeg',' '],
+                          size: 5120,
+                          required: true
+                        }">
+                        <input type="file" class="input__file" id="input__file10" v-on:change="tire_tableUpload"
+                               @change="validate"
+                               ref="file">
+                        <label class="input__file-button" for="input__file10">
+                          <div class="input__file-icon-wrapper">
+                            <img class="input__file-icon" :src="valid?form.tire_table_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -1069,6 +1295,26 @@
                         >
                           <img src="img/example/ctc.jpg" alt="" width="768" height="500">
                         </modal>
+                      </div>
+                    </li>
+                    <li class="photo__item " style="border-bottom: 1px solid var(--bay-leaf);">
+                      <div class="photo__wrapper">
+                        <img class="photo__img" src="" alt="">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                              fill="black"/>
+                        </svg>
+                      </div>
+                      <div class="photo__wrapper">
+                        <img class="photo__img" src="" alt="">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                              fill="black"/>
+                        </svg>
                       </div>
                     </li>
                     <li class="photo__item item-car">
@@ -1137,6 +1383,26 @@
                         </modal>
                       </div>
                     </li>
+                    <li class="photo__item " style="border-bottom: 1px solid var(--bay-leaf);">
+                      <div class="photo__wrapper">
+                        <img class="photo__img" src="" alt="">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                              fill="black"/>
+                        </svg>
+                      </div>
+                      <div class="photo__wrapper">
+                        <img class="photo__img" src="" alt="">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M11.7429 10.3421C12.7112 9.02083 13.1449 7.38264 12.9572 5.7553C12.7695 4.12796 11.9743 2.63149 10.7307 1.56528C9.48701 0.499068 7.88665 -0.0582491 6.24973 0.00482408C4.61282 0.0678972 3.06008 0.746709 1.90217 1.90545C0.744249 3.0642 0.0665484 4.61742 0.00464653 6.25438C-0.0572553 7.89134 0.501207 9.49131 1.56831 10.7342C2.6354 11.9771 4.13244 12.7712 5.75992 12.9577C7.38739 13.1442 9.02528 12.7094 10.3459 11.7401H10.3449C10.3749 11.7801 10.4069 11.8181 10.4429 11.8551L14.2929 15.7051C14.4804 15.8928 14.7348 15.9983 15 15.9983C15.2653 15.9984 15.5198 15.8932 15.7074 15.7056C15.895 15.5181 16.0005 15.2638 16.0006 14.9985C16.0007 14.7332 15.8954 14.4788 15.7079 14.2911L11.8579 10.4411C11.8221 10.405 11.7837 10.3715 11.7429 10.3411V10.3421ZM12.0009 6.49815C12.0009 7.22042 11.8586 7.93562 11.5822 8.60291C11.3058 9.2702 10.9007 9.87651 10.39 10.3872C9.87926 10.898 9.27295 11.3031 8.60566 11.5795C7.93837 11.8559 7.22317 11.9981 6.5009 11.9981C5.77863 11.9981 5.06343 11.8559 4.39614 11.5795C3.72885 11.3031 3.12253 10.898 2.61181 10.3872C2.10109 9.87651 1.69596 9.2702 1.41956 8.60291C1.14316 7.93562 1.0009 7.22042 1.0009 6.49815C1.0009 5.03946 1.58036 3.64051 2.61181 2.60906C3.64326 1.57761 5.04221 0.998147 6.5009 0.998147C7.95959 0.998147 9.35853 1.57761 10.39 2.60906C11.4214 3.64051 12.0009 5.03946 12.0009 6.49815Z"
+                              fill="black"/>
+                        </svg>
+                      </div>
+                    </li>
                     <li class="photo__item ">
                       <div class="photo__wrapper">
                         <img class="photo__img" src="" alt="">
@@ -1162,9 +1428,9 @@
               </div>
             </div>
           </div>
-          <section v-if="step>0 && step<5">
+          <section v-if="form.step>0 && form.step<5">
             <p style="color: red; margin: 5px 5px" v-if="!valid">Пожалуйста, заполните все поля</p>
-            <div class="form__bottom ">
+            <div class="form__bottom">
               <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
               <button class="btn btn--next" @click="stepNext" :disabled="!valid"
                       :class="{'disabled':!valid}">Далее
@@ -1175,7 +1441,7 @@
         </validation-observer>
       </section>
 
-      <section class="step-four" v-if="step === 4">
+      <section class="step-four" v-if="form.step === 4">
         <div v-if="loading" style="display: flex; justify-content: center">
           <ClipLoader
               color="#79B285FF"
@@ -1188,18 +1454,18 @@
             <h3 class="sum__title title">Стоимость услуги</h3>
             <span class="sum__price price">5 000 рублей</span>
             <div style="display: flex" class="form-group">
-              <input type="checkbox" id="checkbox_finish" v-model="checkbox_finish">
+              <input type="checkbox" id="checkbox_finish" v-model="form.checkbox_finish">
 
               <label for="checkbox_finish">Прошу произвести оформление ЭПТС на транспортное средство</label>
             </div>
-            <p style="color:red" v-if="!checkbox_finish">Обязательное поле</p>
+            <p style="color:red" v-if="!form.checkbox_finish">Обязательное поле</p>
           </div>
 
           <div class="form__pay pay">
             <h3 class="pay__title title">Выберите способ оплаты</h3>
             <ul class="pay__list">
               <li class="pay__item"><input type="radio" name="face" value="" checked id="bank_card"
-                                           @click="pay_method==='bank_card'"><label for="bank_card">Банковской
+                                           @click="form.pay_method==='bank_card'"><label for="bank_card">Банковской
                 картой</label>
               </li>
               <!--                <li class="pay__item"><input type="radio" name="face" value="" id="apple_pay"-->
@@ -1209,25 +1475,24 @@
               <!--                                             @click="pay_method==='google_pay'"><label for="google_pay">Google-->
               <!--                  pay</label></li>-->
               <li class="pay__item"><input type="radio" name="face" value="" id="bank_transfer"
-                                           @click="pay_method==='bank_transfer'"><label for="bank_transfer">Банковский
+                                           @click="form.pay_method==='bank_transfer'"><label for="bank_transfer">Банковский
                 перевод</label></li>
             </ul>
           </div>
         </div>
 
-        <section v-if="step>0 && step<5">
+        <section v-if="form.step === 4">
           <div class="form__bottom ">
             <button class="btn btn--back" @click="stepPrev">‹ Назад</button>
-            <button type="submit" class="btn btn--next" :disabled="!checkbox_finish"
-                    :class="{'disabled':!checkbox_finish}">Далее
+            <button type="submit" class="btn btn--next" :disabled="!form.checkbox_finish"
+                    :class="{'disabled':!form.checkbox_finish}" @click="stepNext">Далее
               ›
             </button>
           </div>
         </section>
       </section>
-    </form>
 
-    <section class="step-five" v-if="step === 5">
+    <section class="step-five" v-if="form.step === 5">
       <div class="form">
         <h2 class="form__title title title--green">Оплата и&nbsp;отправка заявки</h2>
         <svg width="53" height="35" viewBox="0 0 31 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1271,7 +1536,7 @@ extend('excluded', {
 
 extend('required', {
   ...required,
-  message: 'Заполните поле "{_field_}"',
+  message: 'Загрузить избражение"',
 })
 
 extend('max', {
@@ -1320,173 +1585,238 @@ export default {
 
   data() {
     return {
+
       loading: false,
+      form: {
+        step: 0,
+        type_owner: 1,
 
-      step: 0,
+        last_name: '',
+        first_name: '',
+        patronymic: '',
 
-      type_owner: 1,
+        org_name: '',
+        kpp: '',
+        ogrn: '',
 
-      last_name: '',
-      first_name: '',
-      patronymic: '',
+        city: '',
+        street: '',
+        home: null,
+        flat: null,
 
-      org_name: '',
-      kpp: '',
-      ogrn: '',
+        pass_serial: null,
+        pass_number: null,
+        pass_photo:'',
+        pass_photo_url:'',
 
-      city: '',
-      street: '',
-      home: null,
-      flat: null,
+        inn: null,
+        snils: null,
+        snils_photo:'',
+        snils_photo_url:'',
 
-      pass_serial: null,
-      pass_number: null,
+        phone: '',
+        email: '',
 
-      inn: null,
-      snils: null,
+        car_mark: '',
+        commercial_name: '',
+        car_type: 0,
+        car_id: null,
+        car_color: '',
+        drive_ts: 0,
 
-      phone: '',
-      email: '',
+        engine_model: '',
+        engine_number: '',
+        engine_power: '',
+        engine_volume: '',
+        fuel: 0,
 
-      car_mark: '',
-      commercial_name: '',
-      car_type: 0,
-      car_id: null,
-      car_color: '',
-      drive_ts: 0,
+        sts_front: '',
+        sts_front_url: '',
 
-      engine_model: '',
-      engine_number: '',
-      engine_power: '',
-      engine_volume: '',
-      fuel: 0,
+        pts_front: '',
+        pts_front_url: '',
 
-      sts_front: '',
-      sts_front_url: '',
+        pts_back: '',
+        pts_back_url:'',
 
-      sts_back: '',
-      sts_back_url: '',
+        sts_back: '',
+        sts_back_url: '',
 
-      ts_front: '',
-      ts_front_url: '',
+        ts_front: '',
+        ts_front_url: '',
 
-      ts_back: '',
-      ts_back_url: '',
+        ts_back: '',
+        ts_back_url: '',
 
-      ts_right: '',
-      ts_right_url: '',
+        ts_right: '',
+        ts_right_url: '',
 
-      ts_left: '',
-      ts_left_url: '',
+        ts_left: '',
+        ts_left_url: '',
 
-      vin_door: '',
-      vin_door_url: '',
+        vin_door: '',
+        vin_door_url: '',
 
-      vin_glass: '',
-      vin_glass_url: '',
+        vin_glass: '',
+        vin_glass_url: '',
 
-      price: 5000,
-      pay_method: 'bank_card',
-      checkbox_finish: true,
+        tire:'',
+        tire_url:'',
 
-      pay_success: false,
+        tire_table: '',
+        tire_table_url: '',
 
+        price: 5000,
+        pay_method: 'bank_card',
+        checkbox_finish: true,
+
+        pay_success: false,
+
+
+      },
       checkbox: true,
+    }
+  },
+
+  created() {
+    if (localStorage.getItem('data')) {
+      this.form = JSON.parse(localStorage.getItem('data'))
     }
   },
 
   methods: {
     stepNext() {
-      this.step++
+      if (this.form.step === 4) {
+        this.submit()
+        return
+      }
+      this.form.step++
       window.scrollTo(0, 0)
+      if (this.form.step > 1) localStorage.setItem('data', JSON.stringify(this.form))
     },
     stepPrev() {
-      this.step--
+      this.form.step--
       window.scrollTo(0, 0)
     },
     submit() {
       this.loading = true
+      console.log('submit')
       this.postData()
     },
 
+    pass_upload(event) {
+      this.form.pass_photo = event.target.files[0]
+      this.form.pass_photo_url = URL.createObjectURL(event.target.files[0])
+    },
+
+    snils_upload(event) {
+      this.form.snils_photo = event.target.files[0]
+      this.form.snils_photo_url = URL.createObjectURL(event.target.files[0])
+    },
+
+    pts_frontUpload(event) {
+      this.form.pts_front = event.target.files[0];
+      this.form.pts_front_url = URL.createObjectURL(event.target.files[0]);
+    },
+
+    pts_backUpload(event) {
+      this.form.pts_back = event.target.files[0];
+      this.form.pts_back_url = URL.createObjectURL(event.target.files[0]);
+    },
 
     sts_frontUpload(event) {
-      this.sts_front = event.target.files[0];
-      this.sts_front_url = URL.createObjectURL(event.target.files[0]);
+      this.form.sts_front = event.target.files[0];
+      this.form.sts_front_url = URL.createObjectURL(event.target.files[0]);
     },
     sts_backUpload(event) {
-      this.sts_back = event.target.files[0];
-      this.sts_back_url = URL.createObjectURL(event.target.files[0]);
+      this.form.sts_back = event.target.files[0];
+      this.form.sts_back_url = URL.createObjectURL(event.target.files[0]);
     },
     ts_frontUpload(event) {
-      this.ts_front = event.target.files[0];
-      this.ts_front_url = URL.createObjectURL(event.target.files[0]);
+      this.form.ts_front = event.target.files[0];
+      this.form.ts_front_url = URL.createObjectURL(event.target.files[0]);
 
     },
     ts_backUpload(event) {
-      this.ts_back = event.target.files[0];
-      this.ts_back_url = URL.createObjectURL(event.target.files[0]);
+      this.form.ts_back = event.target.files[0];
+      this.form.ts_back_url = URL.createObjectURL(event.target.files[0]);
     },
     ts_rightUpload(event) {
-      this.ts_right = event.target.files[0];
-      this.ts_right_url = URL.createObjectURL(event.target.files[0]);
+      this.form.ts_right = event.target.files[0];
+      this.form.ts_right_url = URL.createObjectURL(event.target.files[0]);
     },
     ts_leftUpload(event) {
-      this.ts_left = event.target.files[0];
-      this.ts_left_url = URL.createObjectURL(event.target.files[0]);
+      this.form.ts_left = event.target.files[0];
+      this.form.ts_left_url = URL.createObjectURL(event.target.files[0]);
     },
     vin_doorUpload(event) {
-      this.vin_door = event.target.files[0];
-      this.vin_door_url = URL.createObjectURL(event.target.files[0]);
+      this.form.vin_door = event.target.files[0];
+      this.form.vin_door_url = URL.createObjectURL(event.target.files[0]);
     },
     vin_glassUpload(event) {
-      this.vin_glass = event.target.files[0];
-      this.vin_glass_url = URL.createObjectURL(event.target.files[0]);
+      this.form.vin_glass = event.target.files[0];
+      this.form.vin_glass_url = URL.createObjectURL(event.target.files[0]);
+    },
+    tire_Upload(event) {
+      this.form.tire = event.target.files[0];
+      this.form.tire_url = URL.createObjectURL(event.target.files[0]);
+    },
+    tire_tableUpload(event) {
+      this.form.tire_table = event.target.files[0];
+      this.form.tire_table_url = URL.createObjectURL(event.target.files[0]);
     },
 
     postData() {
 
       let formData = new FormData();
 
-      formData.append('type_owner', this.type_owner)
-      formData.append('last_name', this.last_name)
-      formData.append('first_name', this.first_name)
-      formData.append('patronymic', this.patronymic)
-      formData.append('org_name', this.org_name)
-      formData.append('kpp', this.kpp)
-      formData.append('ogrn', this.ogrn)
-      formData.append('city', this.city)
-      formData.append('street', this.street)
-      formData.append('home', this.home)
-      formData.append('flat', this.flat)
-      formData.append('pass_serial', this.pass_serial)
-      formData.append('pass_number', this.pass_number)
-      formData.append('inn', this.inn)
-      formData.append('snils', this.snils)
-      formData.append('phone', this.phone)
-      formData.append('email', this.email)
-      formData.append('car_mark', this.car_mark)
-      formData.append('commercial_name', this.commercial_name)
-      formData.append('car_type', this.car_type)
-      formData.append('car_id', this.car_id)
-      formData.append('car_color', this.car_color)
-      formData.append('drive_ts', this.drive_ts)
-      formData.append('engine_model', this.engine_model)
-      formData.append('engine_number', this.engine_number)
-      formData.append('engine_power', this.engine_power)
-      formData.append('engine_volume', this.engine_volume)
-      formData.append('fuel', this.fuel)
-      formData.append('sts_front', this.sts_front)
-      formData.append('sts_back', this.sts_back)
-      formData.append('ts_front', this.ts_front)
-      formData.append('ts_back', this.ts_back)
-      formData.append('ts_right', this.ts_right)
-      formData.append('ts_left', this.ts_left)
-      formData.append('vin_door', this.vin_door)
-      formData.append('vin_glass', this.vin_glass)
-      formData.append('price', this.price)
-      formData.append('pay_method', this.pay_method)
-      formData.append('pay_success', this.pay_success)
+      formData.append('type_owner', this.form.type_owner)
+      formData.append('last_name', this.form.last_name)
+      formData.append('first_name', this.form.first_name)
+      formData.append('patronymic', this.form.patronymic)
+      formData.append('org_name', this.form.org_name)
+      formData.append('kpp', this.form.kpp)
+      formData.append('ogrn', this.form.ogrn)
+      formData.append('city', this.form.city)
+      formData.append('street', this.form.street)
+      formData.append('home', this.form.home)
+      formData.append('flat', this.form.flat)
+      formData.append('pass_serial', this.form.pass_serial)
+      formData.append('pass_number', this.form.pass_number)
+      if (this.form.type_owner === 1) {
+        formData.append('pass_photo', this.form.pass_photo)
+        formData.append('snils_photo', this.form.snils_photo)
+      }
+      formData.append('inn', this.form.inn)
+      formData.append('snils', this.form.snils)
+      formData.append('phone', this.form.phone)
+      formData.append('email', this.form.email)
+      formData.append('car_mark', this.form.car_mark)
+      formData.append('commercial_name', this.form.commercial_name)
+      formData.append('car_type', this.form.car_type)
+      formData.append('car_id', this.form.car_id)
+      formData.append('car_color', this.form.car_color)
+      formData.append('drive_ts', this.form.drive_ts)
+      formData.append('engine_model', this.form.engine_model)
+      formData.append('engine_number', this.form.engine_number)
+      formData.append('engine_power', this.form.engine_power)
+      formData.append('engine_volume', this.form.engine_volume)
+      formData.append('fuel', this.form.fuel)
+      formData.append('sts_front', this.form.sts_front)
+      formData.append('sts_back', this.form.sts_back)
+      formData.append('pts_front', this.form.pts_front)
+      formData.append('pts_back', this.form.pts_back)
+      formData.append('ts_front', this.form.ts_front)
+      formData.append('ts_back', this.form.ts_back)
+      formData.append('ts_right', this.form.ts_right)
+      formData.append('ts_left', this.form.ts_left)
+      formData.append('vin_door', this.form.vin_door)
+      formData.append('vin_glass', this.form.vin_glass)
+      formData.append('tire', this.form.tire)
+      formData.append('tire_table', this.form.tire_table)
+      formData.append('price', this.form.price)
+      formData.append('pay_method', this.form.pay_method)
+      formData.append('pay_success', this.form.pay_success)
 
       let config = {
         header: {
@@ -1499,17 +1829,17 @@ export default {
             let order_id = res.data.order_id
             let data = {
               'order_id': order_id,
-              'type_owner': this.type_owner,
-              'email': this.email,
-              'phone': this.phone,
-              'last_name': this.last_name,
-              'first_name': this.first_name,
-              'patronymic': this.patronymic,
-              'org_name': this.org_name
+              'type_owner': this.form.type_owner,
+              'email': this.form.email,
+              'phone': this.form.phone,
+              'last_name': this.form.last_name,
+              'first_name': this.form.first_name,
+              'patronymic': this.form.patronymic,
+              'org_name': this.form.org_name
             }
-            this.loading = false
             axios.post('https://admin.gospts.ru/api/pay', data)
                 .then(res => {
+                  localStorage.clear()
                   window.location.replace(res.data.url)
                 })
           })
