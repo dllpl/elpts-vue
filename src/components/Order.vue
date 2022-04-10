@@ -281,7 +281,7 @@
 
                       <label class="input__file-button" for="input__file__snils">
                         <div class="input__file-icon-wrapper">
-                          <img class="input__file-icon" :src="(valid?form.snils_photo:'/img/file.svg')" width="42"
+                          <img class="input__file-icon" :src="(valid?form.snils_photo_url:'/img/file.svg')" width="42"
                                height="42"
                                alt="Выбрать файл">
                         </div>
