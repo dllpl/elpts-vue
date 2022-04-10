@@ -1536,7 +1536,7 @@ extend('excluded', {
 
 extend('required', {
   ...required,
-  message: 'Загрузить избражение"',
+  message: 'Загрузите фото',
 })
 
 extend('max', {
