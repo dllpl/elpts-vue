@@ -639,6 +639,21 @@
                     </validation-provider>
                   </div>
                 </div>
+                <div class="form__item">
+                  <h3 class="form__name title">Одометр</h3>
+                  <div class="form__input">
+                    <validation-provider
+                        v-slot="{ errors }"
+                        name="Значение одометра"
+                        rules="required"
+                        class="input--s"
+                    >
+                      <input class="input " type="text" name="model" placeholder="Показания одометра"
+                             v-model="form.odometr">
+                      <p style="color:red">{{ errors[0] }}</p>
+                    </validation-provider>
+                  </div>
+                </div>
               </div>
 
 
@@ -929,7 +944,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (по диагонали 1/4)</h3>
+                  <h3 class="form__name title">Фото ТС (45% спереди)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -969,7 +984,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (по диагонали 2/4)</h3>
+                  <h3 class="form__name title">Фото ТС (45% сзади)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -1009,7 +1024,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (по диагонали 3/4)</h3>
+                  <h3 class="form__name title">Фото ТС (спереди)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -1051,7 +1066,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото ТС (по диагонали 4/4)</h3>
+                  <h3 class="form__name title">Фото ТС (сзади)</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -1092,7 +1107,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото VIN-таблички у водительской двери</h3>
+                  <h3 class="form__name title">Фото VIN на табличке/или под лобовым стеклом</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -1135,7 +1150,7 @@
                 </div>
 
                 <div class="form__item">
-                  <h3 class="form__name title">Фото VIN-таблички на лобовом стекле</h3>
+                  <h3 class="form__name title">Фото VIN на кузове</h3>
                   <form class="">
                     <div class="input__wrapper">
                       <ValidationProvider
@@ -1193,47 +1208,6 @@
                         <label class="input__file-button" for="input__file9">
                           <div class="input__file-icon-wrapper">
                             <img class="input__file-icon" :src="valid?form.tire_url:'/img/file.svg'" width="42"
-                                 height="42"
-                                 alt="Выбрать файл">
-                          </div>
-                          <p class="text input__file-button-text"
-                             :class="{'text--done':!valid}"
-                          >Загрузить<br>
-                            <span class="text text--grey">(.jpg, .png, .jpeg  )</span>
-                          </p>
-                          <p class="text input__file-button-text"
-                             :class="{'text--done':valid}"
-                          >Загружено</p>
-
-                          <div class="input__file-icon-wrapper done"
-                               :class="{'done--active':valid}"
-                          >
-                            <img class="input__file-icon" src="/img/icon/done.svg"
-                                 alt="Выбрать файл">
-                          </div>
-                        </label>
-                        <span style="color:red">{{ errors[0] }}</span>
-                      </ValidationProvider>
-                    </div>
-                  </form>
-                </div>
-                <div class="form__item">
-                  <h3 class="form__name title">Фото таблички размерности шин у водительской двери</h3>
-                  <form class="">
-                    <div class="input__wrapper">
-                      <ValidationProvider
-                          v-slot="{ errors, validate, valid }"
-                          :rules="{
-                          ext: ['jpg','png','jpeg',' '],
-                          size: 5120,
-                          required: true
-                        }">
-                        <input type="file" class="input__file" id="input__file10" v-on:change="tire_tableUpload"
-                               @change="validate"
-                               ref="file">
-                        <label class="input__file-button" for="input__file10">
-                          <div class="input__file-icon-wrapper">
-                            <img class="input__file-icon" :src="valid?form.tire_table_url:'/img/file.svg'" width="42"
                                  height="42"
                                  alt="Выбрать файл">
                           </div>
@@ -1350,7 +1324,7 @@
                         </modal>
                       </div>
                       <div class="photo__wrapper" @click="$modal.show('modal6')">
-                        <img class="photo__img" src="img/example/car2.jpg" alt="">
+                        <img class="photo__img" src="img/example/car3.png" alt="">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                           <path
@@ -1362,13 +1336,13 @@
                                :height="700"
                                :adaptive="true"
                         >
-                          <img src="img/example/car2.jpg" alt="" width="700" height="700">
+                          <img src="img/example/car3.png" alt="" width="700" height="700">
                         </modal>
                       </div>
                     </li>
                     <li class="photo__item " style="border-bottom: 1px solid var(--bay-leaf);">
                       <div class="photo__wrapper" @click="$modal.show('modal7')">
-                          <img class="photo__img" src="img/example/car3.png" alt="">
+                          <img class="photo__img" src="img/example/car_front.jpg" alt="">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                           <path
@@ -1380,11 +1354,11 @@
                                  :height="700"
                                  :adaptive="true"
                           >
-                              <img src="img/example/car3.png" alt="" width="700" height="700">
+                              <img src="img/example/car_front.jpg" alt="" width="700" height="700">
                           </modal>
                       </div>
                       <div class="photo__wrapper" @click="$modal.show('modal8')">
-                        <img class="photo__img" src="img/example/car4.jpg" alt="">
+                        <img class="photo__img" src="img/example/car_back.jpg" alt="">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                           <path
@@ -1393,10 +1367,10 @@
                         </svg>
                           <modal name="modal8"
                                  :width="700"
-                                 :height="700"
+                                 :height="500"
                                  :adaptive="true"
                           >
-                              <img src="img/example/car4.jpg" alt="" width="700" height="700">
+                              <img src="img/example/car_back.jpg" alt="" width="700" height="500">
                           </modal>
                       </div>
                     </li>
@@ -1436,7 +1410,7 @@
                     </li>
                       <li class="photo__item" @click="$modal.show('modal11')">
                           <div class="photo__wrapper">
-                              <img class="photo__img" src="img/example/tire.jpg" alt="">
+                              <img class="photo__img" src="img/example/vin_coos.jpg" alt="">
                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                    xmlns="http://www.w3.org/2000/svg">
                                   <path
@@ -1448,11 +1422,11 @@
                                      :height="500"
                                      :adaptive="true"
                               >
-                                  <img src="img/example/tire.jpg" alt="" width="768" height="500">
+                                  <img src="img/example/vin_coos.jpg" alt="" width="768" height="500">
                               </modal>
                           </div>
                           <div class="photo__wrapper" @click="$modal.show('modal12')">
-                              <img class="photo__img" src="img/example/tire_table.jpg" alt="">
+                              <img class="photo__img" src="img/example/tire.jpg" alt="">
                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                    xmlns="http://www.w3.org/2000/svg">
                                   <path
@@ -1464,7 +1438,7 @@
                                      :height="500"
                                      :adaptive="true"
                               >
-                                  <img src="img/example/tire_table.jpg" alt="" width="768" height="500">
+                                  <img src="img/example/tire.jpg" alt="" width="768" height="500">
                               </modal>
                           </div>
                       </li>
@@ -1578,7 +1552,7 @@ extend('excluded', {
 
 extend('required', {
   ...required,
-  message: 'Загрузите фото',
+  message: 'Заполните поле',
 })
 
 extend('max', {
@@ -1668,6 +1642,7 @@ export default {
 
         engine_model: '',
         engine_number: '',
+        odometr: '',
         engine_power: '',
         engine_volume: '',
         fuel: 0,
@@ -1704,9 +1679,6 @@ export default {
 
         tire:'',
         tire_url:'',
-
-        tire_table: '',
-        tire_table_url: '',
 
         price: 5000,
         pay_method: 'bank_card',
@@ -1803,10 +1775,6 @@ export default {
       this.form.tire = event.target.files[0];
       this.form.tire_url = URL.createObjectURL(event.target.files[0]);
     },
-    tire_tableUpload(event) {
-      this.form.tire_table = event.target.files[0];
-      this.form.tire_table_url = URL.createObjectURL(event.target.files[0]);
-    },
 
     postData() {
 
@@ -1841,6 +1809,7 @@ export default {
       formData.append('drive_ts', this.form.drive_ts)
       formData.append('engine_model', this.form.engine_model)
       formData.append('engine_number', this.form.engine_number)
+      formData.append('odometr', this.form.odometr)
       formData.append('engine_power', this.form.engine_power)
       formData.append('engine_volume', this.form.engine_volume)
       formData.append('fuel', this.form.fuel)
@@ -1855,7 +1824,6 @@ export default {
       formData.append('vin_door', this.form.vin_door)
       formData.append('vin_glass', this.form.vin_glass)
       formData.append('tire', this.form.tire)
-      formData.append('tire_table', this.form.tire_table)
       formData.append('price', this.form.price)
       formData.append('pay_method', this.form.pay_method)
       formData.append('pay_success', this.form.pay_success)
