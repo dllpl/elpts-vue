@@ -1696,11 +1696,22 @@ export default {
     if (localStorage.getItem('data')) {
       this.form = JSON.parse(localStorage.getItem('data'))
     }
+    ym(88706711,'reachGoal','start')
   },
 
   methods: {
     stepNext() {
+      if (this.form.step === 1) {
+          ym(88706711,'reachGoal','step1')
+      }
+      if (this.form.step === 2) {
+          ym(88706711,'reachGoal','step2')
+      }
+      if (this.form.step === 3) {
+          ym(88706711,'reachGoal','step3')
+      }
       if (this.form.step === 4) {
+          ym(88706711,'reachGoal','step4')
         this.submit()
         return
       }
