@@ -343,6 +343,15 @@ input {
     margin-bottom: 20px;
 }
 
+.example__button {
+    cursor: pointer;
+    color: var(--bay-leaf);
+    border-radius: 5px;
+    padding: 2px 5px;
+    border: 1px solid var(--bay-leaf);
+    font-size: 14px;
+}
+
 .form__name {
     margin-bottom: 20px;
 }
@@ -719,6 +728,11 @@ input {
     padding: 12px 25px;
 }
 
+.btn--order a {
+    color: var(--white);
+    text-decoration: none;
+}
+
 .text--big {
     font-size: 22px;
 }
@@ -1010,7 +1024,7 @@ input {
     }
 
     .title {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .title--big {

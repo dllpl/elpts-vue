@@ -5,7 +5,7 @@
         <img class="" src="img/logo.png" alt="">
       </a>
       <span class="footer__title text text--big">Есть вопросы?</span>
-      <button class="btn btn--order">Заказать звонок</button>
+      <button class="btn btn--order"><a href="https://wa.me/79869322789" target="_blank">Написать WhatsApp</a></button>
     </div>
     <div class="footer-bottom">
       <ul class="footer__list">
