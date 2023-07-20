@@ -194,6 +194,22 @@ input {
     background-size: contain;
     background-position: left top;
     background-size: 29px 29px;
+    margin-bottom: 30px;
+}
+
+.application-right__example {
+    display: flex;
+}
+
+.application-right__example img {
+    cursor: zoom-in;
+    width: 50%;
+}
+
+.modal_validation_errors {
+    padding: 25px;
+    max-height: 550px;
+    overflow-y: auto;
 }
 
 .link--form {
