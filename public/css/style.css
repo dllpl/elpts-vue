@@ -207,9 +207,12 @@ input {
 }
 
 .modal_validation_errors {
-    padding: 25px;
+    padding: 0px 20px;
     max-height: 550px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .link--form {
@@ -345,6 +348,10 @@ input {
     /* outline: 3px solid blue;*/
 }
 
+.form__left-full {
+    width: 100%;
+}
+
 .form__right {
     width: 48%;
     /*outline: 3px solid green;*/
@@ -366,6 +373,7 @@ input {
     padding: 2px 5px;
     border: 1px solid var(--bay-leaf);
     font-size: 14px;
+    display: none;
 }
 
 .form__name {
@@ -549,6 +557,7 @@ input {
 
 .input__wrapper {
     position: relative;
+    width: 100%;
 }
 
 .input__file {
@@ -1016,6 +1025,9 @@ input {
     body {
         font-size: 14px;
     }
+    .photo__new {
+        display: none;
+    }
     .form__input {
         display: block;
     }
@@ -1178,5 +1190,7 @@ input {
     .footer__item:not(:last-child) {
         margin-bottom: 10px;
     }
-
+    .example__button {
+        display: inline;
+    }
 }
