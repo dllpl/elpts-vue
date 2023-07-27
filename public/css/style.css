@@ -843,8 +843,6 @@ input {
     height: fit-content;
     padding: 20px;
     background-color: #fff;
-    transition: opacity .1s ease-in-out;
-    opacity: 0;
     color:#494c4f;
     font-weight: bold;
 }
@@ -852,7 +850,7 @@ input {
 
 
 .burger__menu-active {
-    opacity: 1;
+    display: block;
 }
 
 .burger__list {}
@@ -1109,10 +1107,6 @@ input {
         background-color: white;
     }
 
-    .container div {
-        margin-top: 65px;
-    }
-
     .header__action-mobile {
         display: flex;
     }
@@ -1133,9 +1127,9 @@ input {
         display: block;
     }
 
-    .burger__menu {
-        display: block;
-    }
+    /*.burger__menu {*/
+    /*    display: block;*/
+    /*}*/
 
     .step__list {
         justify-content: space-between;
