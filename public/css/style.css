@@ -1167,6 +1167,15 @@ input {
 }
 
 @media (max-width:767px) {
+
+    .header {
+        height: 58.52px;
+    }
+
+    .header__logo img {
+        width: 55%;
+    }
+
     body {
         font-size: 14px;
     }
